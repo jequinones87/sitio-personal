@@ -125,8 +125,8 @@ export default function Interests() {
           </div>
         </div>
 
-        {/* Panel B — personal motivations */}
-        <div ref={panelBRef} className={styles.panel} style={{ opacity: 0, transform: 'translateY(30px)' }}>
+        {/* Panel B — personal motivations (desktop sticky panel) */}
+        <div ref={panelBRef} className={styles.panel} data-panel="b" style={{ opacity: 0, transform: 'translateY(30px)' }}>
           <div className={`container ${styles.panelInner}`}>
             <div className={styles.motivHeader}>
               <span className={styles.motivLabel}>{t('int.motiv.label')}</span>
@@ -147,6 +147,27 @@ export default function Interests() {
                 </article>
               ))}
             </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile-only: motivations as standalone section below sticky area */}
+      <div className={styles.motivSection}>
+        <div className="container">
+          <div className={styles.motivHeader}>
+            <span className={styles.motivLabel}>{t('int.motiv.label')}</span>
+            <h3 className={styles.motivTitle}>{t('int.motiv.title')}</h3>
+          </div>
+          <div className={styles.motivGrid}>
+            {MOTIVS.map(({ id, photo }) => (
+              <article key={`mob-${id}`} className={styles.motivCard}>
+                <div className={styles.motivImgWrap}>
+                  <img src={photo} alt={t(`int.${id}.alt`)} className={styles.motivImg} />
+                </div>
+                <h4 className={styles.motivCardTitle}>{t(`int.${id}.title`)}</h4>
+                <p className={styles.motivCardText}>{t(`int.${id}.body`)}</p>
+              </article>
+            ))}
           </div>
         </div>
       </div>

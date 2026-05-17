@@ -213,6 +213,11 @@
   margin: 0 18px 18px 18px;
 }
 
+/* Mobile-only motivations section — hidden on desktop */
+.motivSection {
+  display: none;
+}
+
 /* ── Responsive ─────────────────────────────────────────── */
 
 @media (max-width: 1023px) {
@@ -236,9 +241,10 @@
 }
 
 @media (max-width: 767px) {
+  /* Sticky section only for interest cards, not motivations */
   .interests {
-    height: 800vh;
-    height: 800svh;
+    height: 300vh;
+    height: 300svh;
   }
   .grid {
     grid-template-columns: 1fr;
@@ -249,7 +255,39 @@
     align-items: flex-start;
     overflow-y: auto;
   }
+  /* Panel B hidden on mobile (motivations shown in separate section below) */
+  .panel[data-panel="b"] {
+    display: none;
+  }
+  /* Motivations standalone section (mobile only) */
+  .motivSection {
+    display: block;
+    background: var(--color-bg);
+    padding: 64px 0;
+  }
   .motivGrid {
     grid-template-columns: 1fr;
+  }
+  .motivCard {
+    background: var(--color-surface);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-left: 3px solid var(--color-accent);
+    border-top: 0.5px solid rgba(0,0,0,0.08);
+    border-right: 0.5px solid rgba(0,0,0,0.08);
+    border-bottom: 0.5px solid rgba(0,0,0,0.08);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .motivCardTitle {
+    color: var(--color-dark);
+  }
+  .motivCardText {
+    color: var(--color-secondary);
+  }
+  .motivLabel {
+    color: var(--color-accent);
+  }
+  .motivTitle {
+    color: var(--color-dark);
   }
 }

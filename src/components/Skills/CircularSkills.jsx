@@ -112,6 +112,7 @@ export default function CircularSkills({ skills, autoplay = true }) {
         <AnimatePresence mode="wait">
           <motion.div
             key={activeIndex}
+            className={styles.textBlock}
             variants={quoteVariants}
             initial="initial"
             animate="animate"

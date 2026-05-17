@@ -185,32 +185,77 @@
 }
 
 @media (max-width: 767px) {
+  /* Replace accordion with simple stacked cards */
   .selector {
+    display: flex;
     flex-direction: column;
     height: auto;
-    border-radius: 16px;
+    gap: 16px;
+    border-radius: 0;
+    overflow: visible;
+    background: transparent;
   }
   .card {
-    flex: 1 1 56px;
-    min-width: unset;
-    min-height: 56px;
-    transform: translateY(-40px);
-    border-radius: 0;
+    position: relative;
+    flex: none;
+    width: 100%;
+    min-height: auto;
+    border-radius: 16px;
+    cursor: pointer;
     background-size: cover;
     background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    overflow: hidden;
   }
   .cardVisible {
+    opacity: 1;
     transform: translateY(0);
   }
+  /* Image area */
+  .card::before {
+    content: '';
+    display: block;
+    height: 180px;
+  }
+  /* Shadow always visible */
+  .shadow {
+    background: linear-gradient(to top, rgba(0,0,0,0.82) 60%, rgba(0,0,0,0.1) 100%);
+  }
+  /* Text always visible */
+  .body {
+    position: static;
+    padding: 0 16px 14px 16px;
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+    z-index: 3;
+  }
+  .bodyText {
+    font-size: 14px;
+    line-height: 1.65;
+  }
+  /* Label always visible */
+  .label {
+    position: static;
+    padding: 12px 16px 0 16px;
+    z-index: 4;
+  }
+  .info {
+    opacity: 1;
+    transform: none;
+    white-space: normal;
+  }
   .cardActive {
-    flex: 7 1 0%;
-    min-height: 440px;
+    flex: none;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+    border-color: transparent;
     background-size: cover;
   }
   .header {
     margin-bottom: 36px;
-  }
-  .body {
-    bottom: 90px;
   }
 }
