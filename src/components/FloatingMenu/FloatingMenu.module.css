@@ -187,11 +187,10 @@
 
 @media (max-width: 767px) {
   .wrapper {
-    top: auto;
-    bottom: 24px;
+    top: 16px;
     right: 16px;
   }
   .list {
-    transform-origin: bottom right;
+    transform-origin: top right;
   }
 }

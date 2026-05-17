@@ -156,7 +156,8 @@
   }
   .sideVideo {
     width: 100%;
-    height: 240px;
+    height: 320px;
+    object-position: center 15%;
   }
   .title {
     font-size: 36px;

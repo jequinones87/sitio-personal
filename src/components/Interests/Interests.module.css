@@ -237,14 +237,19 @@
 
 @media (max-width: 767px) {
   .interests {
-    height: 700vh;
-    height: 700svh;
+    height: 800vh;
+    height: 800svh;
   }
   .grid {
     grid-template-columns: 1fr;
     gap: 16px;
   }
   .panel {
-    padding: 60px 0 32px;
+    padding: 70px 0 32px;
+    align-items: flex-start;
+    overflow-y: auto;
+  }
+  .motivGrid {
+    grid-template-columns: 1fr;
   }
 }

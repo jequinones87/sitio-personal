@@ -196,15 +196,21 @@
     min-height: 56px;
     transform: translateY(-40px);
     border-radius: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
   }
   .cardVisible {
     transform: translateY(0);
   }
   .cardActive {
     flex: 7 1 0%;
-    min-height: 320px;
+    min-height: 440px;
+    background-size: cover;
   }
   .header {
     margin-bottom: 36px;
+  }
+  .body {
+    bottom: 90px;
   }
 }

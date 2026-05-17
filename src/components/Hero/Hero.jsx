@@ -29,6 +29,13 @@ export default function Hero() {
     const scrollHint = scrollHintRef.current;
     if (!section || !video || !panelA || !panelB) return;
 
+    const isMobile = window.innerWidth <= 767;
+
+    if (isMobile) {
+      video.loop = true;
+      video.play().catch(() => {});
+    }
+
     let raf = 0;
 
     const update = () => {
@@ -36,23 +43,19 @@ export default function Hero() {
       const total = Math.max(1, rect.height - window.innerHeight);
       const p = Math.min(1, Math.max(0, -rect.top / total));
 
-      // Video scrub
-      if (video.readyState >= 1 && video.duration) {
+      if (!isMobile && video.readyState >= 1 && video.duration) {
         video.currentTime = p * video.duration;
       }
 
-      // Scroll hint fades out immediately on scroll
       if (scrollHint) {
         scrollHint.style.opacity = Math.max(0, 1 - p * 20);
       }
 
-      // Panel A: visible at start, fades out 35%–50%
       const aOut = clamp01(p, 0.35, 0.5);
       panelA.style.opacity = 1 - aOut;
       panelA.style.transform = `translateY(${-aOut * 40}px)`;
       panelA.style.pointerEvents = aOut > 0.95 ? 'none' : 'auto';
 
-      // Panel B: fades in 50%–65%, fades out 95%–100%
       const bIn = clamp01(p, 0.5, 0.65);
       const bOut = clamp01(p, 0.95, 1);
       const bOpacity = bIn * (1 - bOut);
