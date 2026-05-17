@@ -131,7 +131,7 @@ export default function FloatingMenu() {
           tabIndex={open ? 0 : -1}
           onClick={() => {
             setOpen(false);
-            window.gtag?.('event', 'cv_download', { language: lang });
+            window.gtag?.('event', `cv_download_${lang}`);
           }}
         >
           <Download size={16} className={styles.itemIcon} aria-hidden="true" />
