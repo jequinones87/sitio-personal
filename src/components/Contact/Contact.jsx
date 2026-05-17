@@ -45,6 +45,7 @@ export default function Contact() {
       if (data.success) {
         setStatus('success');
         setForm({ name: '', email: '', message: '' });
+        window.gtag?.('event', 'contact_form_submit');
       } else {
         setStatus('error');
       }
@@ -73,6 +74,7 @@ export default function Contact() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.infoItem}
+                onClick={() => window.gtag?.('event', 'linkedin_click')}
               >
                 <span className={styles.infoIcon} aria-hidden="true">
                   <img src="/images/icon-linkedin.png" alt="" className={styles.infoIconImg} />
