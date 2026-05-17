@@ -225,10 +225,10 @@
   .shadow {
     background: linear-gradient(to top, rgba(0,0,0,0.82) 60%, rgba(0,0,0,0.1) 100%);
   }
-  /* Text always visible */
+  /* Uniform padding for text content area */
   .body {
     position: static;
-    padding: 0 16px 14px 16px;
+    padding: 20px 20px 0 20px;
     opacity: 1;
     transform: none;
     pointer-events: auto;
@@ -238,10 +238,10 @@
     font-size: 14px;
     line-height: 1.65;
   }
-  /* Label always visible */
+  /* Label with uniform padding */
   .label {
     position: static;
-    padding: 12px 16px 0 16px;
+    padding: 16px 20px 20px 20px;
     z-index: 4;
   }
   .info {

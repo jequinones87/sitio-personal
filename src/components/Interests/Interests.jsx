@@ -38,10 +38,8 @@ export default function Interests() {
 
     const isMobile = window.innerWidth <= 767;
 
-    if (isMobile) {
-      video.loop = true;
-      video.play().catch(() => {});
-    }
+    // On mobile: no scroll animation — panels are static via CSS
+    if (isMobile) return;
 
     let raf = 0;
 
@@ -50,7 +48,7 @@ export default function Interests() {
       const total = Math.max(1, rect.height - window.innerHeight);
       const p = Math.min(1, Math.max(0, -rect.top / total));
 
-      if (!isMobile && video.readyState >= 1 && video.duration) {
+      if (video.readyState >= 1 && video.duration) {
         video.currentTime = p * video.duration;
       }
 

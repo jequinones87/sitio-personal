@@ -241,23 +241,38 @@
 }
 
 @media (max-width: 767px) {
-  /* Sticky section only for interest cards, not motivations */
+  /* On mobile: no sticky/scroll-scrubbing — both panels shown as static sections */
   .interests {
-    height: 300vh;
-    height: 300svh;
+    height: auto;
+  }
+  .sticky {
+    position: static;
+    height: auto;
+    display: block;
+    overflow: visible;
+  }
+  .videoBg,
+  .videoOverlay {
+    display: none;
+  }
+  /* Panel A: static, dark bg, full content visible */
+  .panel {
+    position: static;
+    opacity: 1 !important;
+    transform: none !important;
+    pointer-events: auto !important;
+    padding: 64px 0 48px;
+    display: block;
+    overflow: visible;
+    background: var(--color-dark);
+  }
+  /* Panel B hidden on mobile (motivations shown in motivSection below) */
+  .panel[data-panel="b"] {
+    display: none;
   }
   .grid {
     grid-template-columns: 1fr;
     gap: 16px;
-  }
-  .panel {
-    padding: 70px 0 32px;
-    align-items: flex-start;
-    overflow-y: auto;
-  }
-  /* Panel B hidden on mobile (motivations shown in separate section below) */
-  .panel[data-panel="b"] {
-    display: none;
   }
   /* Motivations standalone section (mobile only) */
   .motivSection {
