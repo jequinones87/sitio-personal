@@ -1,0 +1,118 @@
+/* Fondo gradient animado adaptado de aceternity/background-gradient-animation.
+   Cinco esferas con mix-blend-mode + filtro SVG "goo" para fusión orgánica.
+   Velocidad y opacidad reducidas para no competir con el texto del Hero. */
+
+.container {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: linear-gradient(40deg, #77C8D4, #35535B);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.svgDefs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.gradientsContainer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  filter: url(#hero-goo) blur(40px);
+}
+
+.orb {
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  top: calc(50% - 40%);
+  left: calc(50% - 40%);
+  mix-blend-mode: hard-light;
+  transform-origin: center center;
+}
+
+/* Esfera 1 — primary teal, movimiento vertical. */
+.orb1 {
+  background: radial-gradient(circle at center, rgba(119, 200, 212, 0.95) 0%, rgba(119, 200, 212, 0) 50%) no-repeat;
+  animation: moveVertical 22s ease infinite;
+  opacity: 1;
+}
+
+/* Esfera 2 — secondary teal oscuro, círculo reverso. */
+.orb2 {
+  background: radial-gradient(circle at center, rgba(53, 83, 91, 0.85) 0%, rgba(53, 83, 91, 0) 50%) no-repeat;
+  transform-origin: calc(50% - 400px);
+  animation: moveInCircle 16s reverse infinite;
+  opacity: 1;
+}
+
+/* Esfera 3 — primary teal, círculo lineal. */
+.orb3 {
+  background: radial-gradient(circle at center, rgba(119, 200, 212, 0.85) 0%, rgba(119, 200, 212, 0) 50%) no-repeat;
+  transform-origin: calc(50% + 400px);
+  animation: moveInCircle 32s linear infinite;
+  opacity: 1;
+}
+
+/* Esfera 4 — accent coral, movimiento horizontal. */
+.orb4 {
+  background: radial-gradient(circle at center, rgba(235, 90, 74, 0.85) 0%, rgba(235, 90, 74, 0) 50%) no-repeat;
+  transform-origin: calc(50% - 200px);
+  animation: moveHorizontal 28s ease infinite;
+  opacity: 0.8;
+}
+
+/* Esfera 5 — dark, círculo amplio para anclar visualmente. */
+.orb5 {
+  background: radial-gradient(circle at center, rgba(28, 28, 26, 0.85) 0%, rgba(28, 28, 26, 0) 50%) no-repeat;
+  transform-origin: calc(50% - 800px) calc(50% + 800px);
+  animation: moveInCircle 18s ease infinite;
+  opacity: 0.95;
+}
+
+/* Esfera del cursor — coral, sigue al puntero del Hero. */
+.pointer {
+  position: absolute;
+  background: radial-gradient(circle at center, rgba(235, 90, 74, 0.9) 0%, rgba(235, 90, 74, 0) 50%) no-repeat;
+  mix-blend-mode: hard-light;
+  width: 100%;
+  height: 100%;
+  top: -50%;
+  left: -50%;
+  opacity: 0.8;
+  transition: transform 80ms linear;
+  pointer-events: none;
+}
+
+@keyframes moveVertical {
+  0%   { transform: translateY(-50%); }
+  50%  { transform: translateY(50%); }
+  100% { transform: translateY(-50%); }
+}
+
+@keyframes moveInCircle {
+  0%   { transform: rotate(0deg); }
+  50%  { transform: rotate(180deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes moveHorizontal {
+  0%   { transform: translateX(-50%) translateY(-10%); }
+  50%  { transform: translateX(50%) translateY(10%); }
+  100% { transform: translateX(-50%) translateY(-10%); }
+}
+
+/* Respeta la preferencia del usuario por movimiento reducido. */
+@media (prefers-reduced-motion: reduce) {
+  .orb1, .orb2, .orb3, .orb4, .orb5 {
+    animation: none;
+  }
+  .pointer {
+    display: none;
+  }
+}

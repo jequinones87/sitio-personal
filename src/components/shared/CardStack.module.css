@@ -1,0 +1,25 @@
+/* Contenedor del stack: define el contexto 3D y el flujo vertical de las tarjetas. */
+.container {
+  position: relative;
+  width: 100%;
+  perspective: 1000px;
+}
+
+/* Tarjeta sticky que se "apila" sobre las anteriores al hacer scroll.
+   `--stack-top` lo inyecta el componente JS según el índice. */
+.card {
+  position: sticky;
+  top: var(--stack-top, 0px);
+  transform: translateZ(var(--stack-z, 0px));
+  backface-visibility: hidden;
+  transition: transform 200ms ease;
+}
+
+/* En móvil desactivamos el stack para que cada tarjeta fluya con el contenido,
+   evitando que el sticky se quede pegado bajo el FAB. */
+@media (max-width: 767px) {
+  .card {
+    position: static;
+    transform: none;
+  }
+}

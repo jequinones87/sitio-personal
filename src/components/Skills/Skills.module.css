@@ -1,0 +1,92 @@
+.skills {
+  background: #1C1C1A;
+  padding: var(--section-py) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background video — top-right quarter only */
+.bgVideo {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 38%;
+  height: 50%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.55;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Gradient mask: fades video edges into #1C1C1A */
+.bgFade {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 38%;
+  height: 50%;
+  background:
+    linear-gradient(to right, #1C1C1A 0%, transparent 35%),
+    linear-gradient(to top, #1C1C1A 0%, transparent 40%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Content sits above video */
+.inner {
+  position: relative;
+  z-index: 2;
+}
+
+.header {
+  margin-bottom: 69px;
+  max-width: 600px;
+}
+
+@media (max-width: 1023px) {
+  .header {
+    margin-bottom: 52px;
+  }
+}
+
+@media (max-width: 767px) {
+  .header {
+    margin-bottom: 40px;
+  }
+}
+
+.title {
+  font-size: var(--text-h2);
+  font-weight: 700;
+  line-height: 1.2;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  max-width: 11ch;
+}
+
+@media (max-width: 1023px) {
+  .title {
+    font-size: 36px;
+  }
+  .bgVideo,
+  .bgFade {
+    width: 50%;
+    height: 40%;
+  }
+  .bgVideo {
+    opacity: 0.35;
+  }
+}
+
+@media (max-width: 767px) {
+  .bgVideo,
+  .bgFade {
+    width: 70%;
+    height: 35%;
+  }
+  .bgVideo {
+    opacity: 0.2;
+  }
+}

@@ -1,0 +1,197 @@
+.wrapper {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+
+  /* Tokens de tono — el JS aplica .toneDark / .toneLight para conmutarlos.
+     El cambio de color va con transición fade en .toggle y .list. */
+  --fam-bg: var(--color-accent);
+  --fam-bg-hover: #d44e3f;
+  --fam-fg: #fff;
+  --fam-icon: #fff;
+  --fam-item-hover-bg: rgba(255, 255, 255, 0.12);
+  --fam-divider: rgba(255, 255, 255, 0.18);
+  --fam-pill-border: #fff;
+  --fam-pill-color: #fff;
+}
+
+.toneDark {
+  /* sobre fondos oscuros (#77C8D4, #35535B, #1C1C1A) */
+  --fam-bg: var(--color-accent);
+  --fam-bg-hover: #d44e3f;
+  --fam-fg: #fff;
+  --fam-icon: #fff;
+  --fam-item-hover-bg: rgba(255, 255, 255, 0.14);
+  --fam-divider: rgba(255, 255, 255, 0.18);
+  --fam-pill-border: #fff;
+  --fam-pill-color: #fff;
+}
+
+.toneLight {
+  /* sobre fondos claros (#F7F6F2, #FFFFFF) — FAB teal con contenido blanco */
+  --fam-bg: var(--color-primary);
+  --fam-bg-hover: #5fb6c4;
+  --fam-fg: #fff;
+  --fam-icon: #fff;
+  --fam-item-hover-bg: rgba(255, 255, 255, 0.18);
+  --fam-divider: rgba(255, 255, 255, 0.28);
+  --fam-pill-border: #fff;
+  --fam-pill-color: #fff;
+}
+
+.toggle {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--fam-bg);
+  color: var(--fam-fg);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background-color 350ms ease,
+    color 350ms ease,
+    border-color 350ms ease,
+    transform 250ms ease;
+  font-family: var(--font-main);
+}
+
+.toggle:hover {
+  background: var(--fam-bg-hover);
+}
+
+.toggleIcon {
+  transition: transform 250ms ease, color 350ms ease;
+  color: var(--fam-fg);
+}
+
+.open .toggleIcon {
+  transform: rotate(45deg);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  min-width: 220px;
+  background: var(--fam-bg);
+  color: var(--fam-fg);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: var(--radius-lg);
+  padding: 8px;
+  opacity: 0;
+  transform: translateY(-8px) scale(0.96);
+  transform-origin: top right;
+  transition:
+    opacity 200ms ease,
+    transform 200ms ease,
+    background-color 350ms ease,
+    color 350ms ease,
+    border-color 350ms ease;
+  pointer-events: none;
+}
+
+.open .list {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md);
+  color: var(--fam-fg);
+  font-family: var(--font-main);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  transition:
+    background-color 180ms ease,
+    color 350ms ease,
+    transform 180ms ease;
+  opacity: 0;
+  transform: translateX(8px);
+}
+
+.open .item {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.open .item:nth-child(1) { transition-delay: 30ms; }
+.open .item:nth-child(2) { transition-delay: 60ms; }
+.open .item:nth-child(3) { transition-delay: 90ms; }
+.open .item:nth-child(4) { transition-delay: 120ms; }
+.open .item:nth-child(5) { transition-delay: 150ms; }
+.open .item:nth-child(6) { transition-delay: 180ms; }
+.open .item:nth-child(7) { transition-delay: 210ms; }
+
+.item:hover {
+  background: var(--fam-item-hover-bg);
+}
+
+.item:focus-visible {
+  outline: 2px solid var(--fam-fg);
+  outline-offset: 2px;
+}
+
+.itemIcon {
+  flex-shrink: 0;
+  color: var(--fam-icon);
+  transition: color 350ms ease;
+}
+
+.divider {
+  height: 1px;
+  background: var(--fam-divider);
+  margin: 4px 6px;
+  transition: background-color 350ms ease;
+}
+
+.cv {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.cv:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.lang {
+  justify-content: space-between;
+}
+
+.langPill {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--fam-pill-border);
+  color: var(--fam-pill-color);
+  letter-spacing: 0.05em;
+  transition: border-color 350ms ease, color 350ms ease;
+}
+
+@media (max-width: 767px) {
+  .wrapper {
+    top: auto;
+    bottom: 24px;
+    right: 16px;
+  }
+  .list {
+    transform-origin: bottom right;
+  }
+}

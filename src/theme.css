@@ -1,0 +1,75 @@
+:root {
+  /* Paleta */
+  --color-primary:   #77C8D4;
+  --color-secondary: #35535B;
+  --color-accent:    #EB5A4A;
+  --color-bg:        #F7F6F2;
+  --color-dark:      #1C1C1A;
+  --color-surface:   #FFFFFF;
+
+  /* Tipografía */
+  --font-main: 'Plus Jakarta Sans', sans-serif;
+  --text-display: 56px;
+  --text-h2: 56px;
+  --text-h3: 20px;
+  --text-body: 16px;
+  --text-label: 11px;
+  --text-small: 13px;
+
+  /* Espaciado */
+  --section-py: 96px;
+  --section-py-mobile: 64px;
+  --container-max: 1120px;
+  --container-px: 24px;
+  --gap-sm: 8px;
+  --gap-md: 16px;
+  --gap-lg: 24px;
+  --gap-xl: 48px;
+
+  /* Radios */
+  --radius-sm:   6px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-pill: 100px;
+}
+
+body {
+  font-family: var(--font-main);
+  font-size: var(--text-body);
+  font-weight: 400;
+  color: var(--color-dark);
+  background: var(--color-bg);
+  line-height: 1.7;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-main);
+}
+
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-px);
+  width: 100%;
+}
+
+.section {
+  padding: var(--section-py) 0;
+}
+
+@media (max-width: 767px) {
+  .section {
+    padding: var(--section-py-mobile) 0;
+  }
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 400ms ease-out, transform 400ms ease-out;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}

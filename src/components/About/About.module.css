@@ -1,0 +1,170 @@
+.about {
+  background: var(--color-bg);
+  padding: var(--section-py) 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap-xl);
+  align-items: start;
+}
+
+.intro {
+  position: sticky;
+  top: 96px;
+  align-self: start;
+  padding-bottom: 32px;
+}
+
+.title {
+  font-size: var(--text-h2);
+  font-weight: 700;
+  line-height: 1.05;
+  color: var(--color-dark);
+  margin-bottom: 24px;
+  letter-spacing: -0.02em;
+  max-width: 13ch;
+  text-transform: uppercase;
+}
+
+.body {
+  font-size: var(--text-body);
+  line-height: 1.7;
+  color: var(--color-dark);
+  opacity: 0.85;
+  max-width: 480px;
+}
+
+/* ── Accordion ─────────────────────────────────────────── */
+
+.accordion {
+  width: 100%;
+}
+
+.item {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.item:first-child {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  margin: 0;
+}
+
+.trigger {
+  all: unset;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  padding: 22px 0;
+  cursor: pointer;
+  color: var(--color-dark);
+  opacity: 0.35;
+  transition: opacity 0.2s ease;
+  box-sizing: border-box;
+}
+
+.trigger:hover,
+.trigger[data-state='open'] {
+  opacity: 1;
+}
+
+.triggerIndex {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--color-dark);
+  flex-shrink: 0;
+  width: 24px;
+}
+
+.triggerTitle {
+  flex: 1;
+  font-size: clamp(24px, 3.5vw, 42px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  /* Override accent to primary per latest request */
+  color: var(--color-accent);
+}
+
+.trigger[data-state='open'] .triggerTitle {
+  color: var(--color-accent);
+}
+
+.triggerIcon {
+  flex-shrink: 0;
+  color: var(--color-dark);
+  transition: transform 0.25s ease;
+  display: flex;
+  align-items: center;
+}
+
+/* Hide the vertical bar of the + when open → becomes − */
+.trigger[data-state='open'] .iconV {
+  display: none;
+}
+
+/* ── Content animate open/close ────────────────────────── */
+
+.content {
+  overflow: hidden;
+}
+
+.content[data-state='open'] {
+  animation: slideDown 0.25s ease-out;
+}
+
+.content[data-state='closed'] {
+  animation: slideUp 0.2s ease-out;
+}
+
+@keyframes slideDown {
+  from { height: 0; opacity: 0; }
+  to   { height: var(--radix-accordion-content-height); opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { height: var(--radix-accordion-content-height); opacity: 1; }
+  to   { height: 0; opacity: 0; }
+}
+
+.contentBody {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--color-dark);
+  opacity: 0.8;
+  padding: 0 0 22px 44px;
+}
+
+/* ── Responsive ─────────────────────────────────────────── */
+
+@media (max-width: 1023px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .intro {
+    position: static;
+    padding-bottom: 0;
+  }
+  .title {
+    font-size: 36px;
+    max-width: 13ch;
+  }
+}
+
+@media (max-width: 767px) {
+  .triggerTitle {
+    font-size: 22px;
+  }
+  .contentBody {
+    padding-left: 28px;
+  }
+}
