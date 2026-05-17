@@ -241,30 +241,31 @@
 }
 
 @media (max-width: 767px) {
-  /* On mobile: no sticky/scroll-scrubbing — both panels shown as static sections */
+  /* On mobile: static layout with video bg + IntersectionObserver card animation */
   .interests {
     height: auto;
   }
   .sticky {
-    position: static;
+    position: relative;
     height: auto;
     display: block;
     overflow: visible;
   }
-  .videoBg,
-  .videoOverlay {
-    display: none;
+  /* Video as absolute bg within the relative sticky container */
+  .videoBg {
+    position: absolute;
+    display: block;
   }
-  /* Panel A: static, dark bg, full content visible */
+  /* Panel A: static over video, full content visible */
   .panel {
-    position: static;
+    position: relative;
     opacity: 1 !important;
     transform: none !important;
     pointer-events: auto !important;
     padding: 64px 0 48px;
     display: block;
     overflow: visible;
-    background: var(--color-dark);
+    z-index: 2;
   }
   /* Panel B hidden on mobile (motivations shown in motivSection below) */
   .panel[data-panel="b"] {
@@ -273,6 +274,16 @@
   .grid {
     grid-template-columns: 1fr;
     gap: 16px;
+  }
+  /* Cards start hidden, animated in by IntersectionObserver */
+  .card {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .cardVisible {
+    opacity: 1;
+    transform: translateY(0);
   }
   /* Motivations standalone section (mobile only) */
   .motivSection {

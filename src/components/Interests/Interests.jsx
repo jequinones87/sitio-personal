@@ -28,19 +28,43 @@ export default function Interests() {
   const videoRef = useRef(null);
   const panelARef = useRef(null);
   const panelBRef = useRef(null);
+  const cardRefs = useRef([]);
 
   useEffect(() => {
     const section = sectionRef.current;
     const video = videoRef.current;
     const panelA = panelARef.current;
     const panelB = panelBRef.current;
-    if (!section || !video || !panelA || !panelB) return;
+    if (!section || !panelA || !panelB) return;
 
     const isMobile = window.innerWidth <= 767;
 
-    // On mobile: no scroll animation — panels are static via CSS
-    if (isMobile) return;
+    if (isMobile) {
+      // Mobile: IntersectionObserver triggers staggered card animation
+      if (video) {
+        video.loop = true;
+        video.play().catch(() => {});
+      }
 
+      const cards = cardRefs.current.filter(Boolean);
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              cards.forEach((card, i) => {
+                setTimeout(() => card.classList.add(styles.cardVisible), i * 120);
+              });
+              observer.disconnect();
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+      observer.observe(section);
+      return () => observer.disconnect();
+    }
+
+    // Desktop: scroll-scrubbing
     let raf = 0;
 
     const update = () => {
@@ -48,17 +72,15 @@ export default function Interests() {
       const total = Math.max(1, rect.height - window.innerHeight);
       const p = Math.min(1, Math.max(0, -rect.top / total));
 
-      if (video.readyState >= 1 && video.duration) {
+      if (video && video.readyState >= 1 && video.duration) {
         video.currentTime = p * video.duration;
       }
 
-      // Panel A (glassmorphism cards): visible at start, fades out 40%–55%
       const aOut = clamp01(p, 0.4, 0.55);
       panelA.style.opacity = 1 - aOut;
       panelA.style.transform = `translateY(${-aOut * 40}px)`;
       panelA.style.pointerEvents = aOut > 0.95 ? 'none' : 'auto';
 
-      // Panel B (motivations): fades in 55%–70%, stays through end
       const bIn = clamp01(p, 0.55, 0.70);
       panelB.style.opacity = bIn;
       panelB.style.transform = `translateY(${(1 - bIn) * 30}px)`;
@@ -109,8 +131,8 @@ export default function Interests() {
               {CARDS.map(({ id, Icon }, i) => (
                 <div
                   key={id}
+                  ref={(el) => (cardRefs.current[i] = el)}
                   className={styles.card}
-                  style={{ transitionDelay: `${i * 100}ms` }}
                 >
                   <div className={styles.iconWrap} aria-hidden="true">
                     <Icon size={48} strokeWidth={1.5} />
@@ -149,7 +171,7 @@ export default function Interests() {
         </div>
       </div>
 
-      {/* Mobile-only: motivations as standalone section below sticky area */}
+      {/* Mobile-only: motivations as standalone section below */}
       <div className={styles.motivSection}>
         <div className="container">
           <div className={styles.motivHeader}>
