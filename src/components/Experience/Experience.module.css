@@ -215,15 +215,15 @@
     opacity: 1;
     transform: translateY(0);
   }
-  /* Image area */
+  /* Image area at top */
   .card::before {
     content: '';
     display: block;
     height: 180px;
   }
-  /* Shadow always visible */
+  /* Lighter gradient: image visible in top half, text readable in bottom */
   .shadow {
-    background: linear-gradient(to top, rgba(0,0,0,0.82) 60%, rgba(0,0,0,0.1) 100%);
+    background: linear-gradient(to top, rgba(0,0,0,0.65) 40%, rgba(0,0,0,0) 100%);
   }
   /* Uniform padding for text content area */
   .body {

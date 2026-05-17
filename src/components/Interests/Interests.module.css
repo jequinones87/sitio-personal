@@ -289,7 +289,7 @@
   .motivSection {
     display: block;
     background: var(--color-bg);
-    padding: 64px 0;
+    padding: 64px 0 48px;
   }
   .motivGrid {
     grid-template-columns: 1fr;

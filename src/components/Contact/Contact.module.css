@@ -163,3 +163,9 @@
     font-size: 36px;
   }
 }
+
+@media (max-width: 767px) {
+  .contact {
+    padding: 48px 0 64px;
+  }
+}
