@@ -20,6 +20,15 @@ const MOTIVS = [
   { id: 'm4', photo: '/images/motiv-clearlens.webp' },
 ];
 
+function linkClearLens(text, className) {
+  const parts = text.split('ClearLens');
+  if (parts.length === 1) return text;
+  return parts.reduce((acc, part, i) => {
+    if (i === 0) return [part];
+    return [...acc, <a key={i} href="https://clearlens.app/" target="_blank" rel="noopener noreferrer" className={className}>ClearLens</a>, part];
+  }, []);
+}
+
 function clamp01(x, a, b) {
   if (b === a) return x >= b ? 1 : 0;
   return Math.min(1, Math.max(0, (x - a) / (b - a)));
@@ -215,7 +224,9 @@ export default function Interests() {
                     <img src={photo} alt={t(`int.${id}.alt`)} className={styles.motivImg} />
                   </div>
                   <h4 className={styles.motivCardTitle}>{t(`int.${id}.title`)}</h4>
-                  <p className={styles.motivCardText}>{t(`int.${id}.body`)}</p>
+                  <p className={styles.motivCardText}>
+                    {id === 'm4' ? linkClearLens(t('int.m4.body'), styles.motivCardLink) : t(`int.${id}.body`)}
+                  </p>
                 </article>
               ))}
             </div>
@@ -237,7 +248,9 @@ export default function Interests() {
                   <img src={photo} alt={t(`int.${id}.alt`)} className={styles.motivImg} />
                 </div>
                 <h4 className={styles.motivCardTitle}>{t(`int.${id}.title`)}</h4>
-                <p className={styles.motivCardText}>{t(`int.${id}.body`)}</p>
+                <p className={styles.motivCardText}>
+                  {id === 'm4' ? linkClearLens(t('int.m4.body'), styles.motivCardLinkDark) : t(`int.${id}.body`)}
+                </p>
               </article>
             ))}
           </div>
