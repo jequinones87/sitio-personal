@@ -130,7 +130,7 @@ node scripts/optimize-images.mjs  # Convierte JPG/PNG → WebP en public/images/
 6. **Mobile-first** — media queries `max-width: 1023px` y `767px` en cada componente.
 7. **Accesibilidad mínima:** `alt` en imágenes, `aria-label` en botones de ícono.
 8. **Imágenes siempre en WebP** — no usar JPG/PNG en producción. Correr el script de optimización antes de referenciar nuevas imágenes.
-9. **Videos optimizados:** hero.mp4 con CRF 24 (scroll-scrubbing). bckg/interests/yomismo con CRF 28. Los `*_original.mp4` están en .gitignore.
+9. **Videos optimizados:** hero.mp4 e interests.mp4 con CRF 24/28 **y `-g 24 -keyint_min 24 -sc_threshold 0`** (keyframe cada segundo — imprescindible para scroll-scrubbing fluido). bckg/yomismo con CRF 28. Los `*_original.mp4` están en .gitignore.
 10. **No reinstalar @emailjs/browser** — el formulario usa Web3Forms.
 
 ---
