@@ -12,9 +12,11 @@ const CARDS = [
 ];
 
 const MOTIVS = [
-  { id: 'm1', photo: '/images/motiv-padre.jpg' },
-  { id: 'm2', photo: '/images/motiv-deporte.jpg' },
-  { id: 'm3', photo: '/images/motiv-proposito.jpg' },
+  { id: 'm1', photo: '/images/motiv-padre.webp' },
+  { id: 'm2', photo: '/images/motiv-deporte.webp' },
+  { id: 'm3', photo: '/images/motiv-proposito.webp' },
+  // TODO: provide image at public/images/motiv-clearlens.webp
+  { id: 'm4', photo: '/images/motiv-clearlens.webp' },
 ];
 
 function clamp01(x, a, b) {

@@ -5,14 +5,14 @@ import CircularSkills from './CircularSkills';
 import styles from './Skills.module.css';
 
 const SKILLS_DATA = [
-  { id: 's1', src: '/images/competencias/marketing.jpg?v=2' },
-  { id: 's2', src: '/images/competencias/seo.jpg?v=2' },
-  { id: 's3', src: '/images/competencias/cro_2.jpg' },
-  { id: 's4', src: '/images/competencias/ads.jpg?v=2' },
-  { id: 's5', src: '/images/competencias/analytics.jpg?v=2' },
-  { id: 's6', src: '/images/competencias/trade.jpg?v=2' },
-  { id: 's7', src: '/images/competencias/social_media.jpg?v=2' },
-  { id: 's8', src: '/images/competencias/ecommerce.jpg?v=2' },
+  { id: 's1', src: '/images/competencias/marketing.webp' },
+  { id: 's2', src: '/images/competencias/seo.webp' },
+  { id: 's3', src: '/images/competencias/cro_2.webp' },
+  { id: 's4', src: '/images/competencias/ads.webp' },
+  { id: 's5', src: '/images/competencias/analytics.webp' },
+  { id: 's6', src: '/images/competencias/trade.webp' },
+  { id: 's7', src: '/images/competencias/social_media.webp' },
+  { id: 's8', src: '/images/competencias/ecommerce.webp' },
 ];
 
 export default function Skills() {

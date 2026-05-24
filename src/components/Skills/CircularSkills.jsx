@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, useMemo, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useLang } from '../../context/LangContext';
 import styles from './CircularSkills.module.css';
 
@@ -139,10 +139,10 @@ export default function CircularSkills({ skills, autoplay = true }) {
 
         <div className={styles.arrows}>
           <button className={styles.arrowBtn} onClick={handlePrev} aria-label={t('skills.prev')}>
-            <FaArrowLeft size={18} />
+            <ChevronLeft size={20} />
           </button>
           <button className={styles.arrowBtn} onClick={handleNext} aria-label={t('skills.next')}>
-            <FaArrowRight size={18} />
+            <ChevronRight size={20} />
           </button>
         </div>
       </div>

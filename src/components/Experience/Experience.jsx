@@ -7,27 +7,27 @@ import styles from './Experience.module.css';
 const ITEMS = [
   {
     id: 'item1',
-    image: '/images/experience-idiem.jpg',
+    image: '/images/experience-idiem.webp',
     Icon: Building2,
   },
   {
     id: 'item2',
-    image: '/images/experience-consultor.jpg',
+    image: '/images/experience-consultor.webp',
     Icon: Briefcase,
   },
   {
     id: 'item3',
-    image: '/images/experience-reebok.jpg',
+    image: '/images/experience-reebok.webp',
     Icon: ShoppingBag,
   },
   {
     id: 'item4',
-    image: '/images/experience-adidas.jpg',
+    image: '/images/experience-adidas.webp',
     Icon: Award,
   },
   {
     id: 'item5',
-    image: '/images/experience-labstore.jpg',
+    image: '/images/experience-labstore.webp',
     Icon: PenTool,
   },
 ];

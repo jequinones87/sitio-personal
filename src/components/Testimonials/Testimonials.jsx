@@ -6,12 +6,12 @@ import styles from './Testimonials.module.css';
 const CARDS = [
   {
     id: 'c1',
-    photo: '/images/testimonial-xavier.jpg',
+    photo: '/images/testimonial-xavier.webp',
     linkedin: 'https://www.linkedin.com/in/xavi-espinosa/',
   },
   {
     id: 'c2',
-    photo: '/images/testimonial-cristian.jpg',
+    photo: '/images/testimonial-cristian.webp',
     linkedin: 'https://www.linkedin.com/in/cristi%C3%A1n-fern%C3%A1ndez-pinochet-ba3493121/',
   },
 ];

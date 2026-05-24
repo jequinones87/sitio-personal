@@ -65,7 +65,7 @@ export default function Contact() {
             <div className={styles.infoList}>
               <a href="mailto:jequinones87@gmail.com" className={styles.infoItem}>
                 <span className={styles.infoIcon} aria-hidden="true">
-                  <img src="/images/icon-mail.png" alt="" className={styles.infoIconImg} />
+                  <img src="/images/icon-mail.webp" alt="" className={styles.infoIconImg} />
                 </span>
                 jequinones87@gmail.com
               </a>
@@ -77,7 +77,7 @@ export default function Contact() {
                 onClick={() => window.gtag?.('event', 'linkedin_click')}
               >
                 <span className={styles.infoIcon} aria-hidden="true">
-                  <img src="/images/icon-linkedin.png" alt="" className={styles.infoIconImg} />
+                  <img src="/images/icon-linkedin.webp" alt="" className={styles.infoIconImg} />
                 </span>
                 linkedin.com/in/juanquinonesrioseco
               </a>
