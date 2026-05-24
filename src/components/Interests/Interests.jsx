@@ -4,6 +4,8 @@ import { useLang } from '../../context/LangContext';
 import SectionTag from '../shared/SectionTag';
 import styles from './Interests.module.css';
 
+const INT_FRAME_COUNT = 106;
+
 const CARDS = [
   { id: 'p1', Icon: Users },
   { id: 'p2', Icon: ClipboardCheck },
@@ -24,29 +26,74 @@ function clamp01(x, a, b) {
   return Math.min(1, Math.max(0, (x - a) / (b - a)));
 }
 
+function preloadFrames(count, basePath) {
+  const imgs = [];
+  for (let i = 1; i <= count; i++) {
+    const img = new Image();
+    img.src = `${basePath}f${String(i).padStart(3, '0')}.webp`;
+    imgs.push(img);
+  }
+  return imgs;
+}
+
 export default function Interests() {
   const { t } = useLang();
   const sectionRef = useRef(null);
-  const videoRef = useRef(null);
+  const canvasRef = useRef(null);
+  const framesRef = useRef(null);
   const panelARef = useRef(null);
   const panelBRef = useRef(null);
   const cardRefs = useRef([]);
 
   useEffect(() => {
     const section = sectionRef.current;
-    const video = videoRef.current;
+    const canvas = canvasRef.current;
     const panelA = panelARef.current;
     const panelB = panelBRef.current;
     if (!section || !panelA || !panelB) return;
 
     const isMobile = window.innerWidth <= 767;
 
+    // Preload frames (desktop scrubbing + mobile loop)
+    const frames = preloadFrames(INT_FRAME_COUNT, '/frames/interests/');
+    framesRef.current = frames;
+
+    let lastIndex = -1;
+
+    function drawFrame(index) {
+      if (!canvas) return;
+      if (index === lastIndex) return;
+      lastIndex = index;
+      const img = frames[index];
+      if (!img.complete || !img.naturalWidth) return;
+      const ctx = canvas.getContext('2d');
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+      const scale = Math.max(canvas.width / img.naturalWidth, canvas.height / img.naturalHeight);
+      const w = img.naturalWidth * scale;
+      const h = img.naturalHeight * scale;
+      ctx.drawImage(img, (canvas.width - w) / 2, (canvas.height - h) / 2, w, h);
+    }
+
+    frames[0].onload = () => drawFrame(0);
+    if (frames[0].complete) drawFrame(0);
+
     if (isMobile) {
-      // Mobile: IntersectionObserver triggers staggered card animation
-      if (video) {
-        video.loop = true;
-        video.play().catch(() => {});
+      // Mobile: loop canvas animation + IntersectionObserver for cards
+      let animFrame = 0;
+      let mobileFrameIndex = 0;
+      let lastTime = 0;
+      const INTERVAL = 1000 / 15;
+
+      function mobileLoop(ts) {
+        if (ts - lastTime >= INTERVAL) {
+          lastTime = ts;
+          mobileFrameIndex = (mobileFrameIndex + 1) % INT_FRAME_COUNT;
+          drawFrame(mobileFrameIndex);
+        }
+        animFrame = requestAnimationFrame(mobileLoop);
       }
+      animFrame = requestAnimationFrame(mobileLoop);
 
       const cards = cardRefs.current.filter(Boolean);
       const observer = new IntersectionObserver(
@@ -63,10 +110,13 @@ export default function Interests() {
         { threshold: 0.2 }
       );
       observer.observe(section);
-      return () => observer.disconnect();
+      return () => {
+        observer.disconnect();
+        cancelAnimationFrame(animFrame);
+      };
     }
 
-    // Desktop: scroll-scrubbing
+    // Desktop: scroll-scrubbing via canvas
     let raf = 0;
 
     const update = () => {
@@ -74,9 +124,8 @@ export default function Interests() {
       const total = Math.max(1, rect.height - window.innerHeight);
       const p = Math.min(1, Math.max(0, -rect.top / total));
 
-      if (video && video.readyState >= 1 && video.duration) {
-        video.currentTime = p * video.duration;
-      }
+      const index = Math.round(p * (INT_FRAME_COUNT - 1));
+      drawFrame(index);
 
       const aOut = clamp01(p, 0.4, 0.55);
       panelA.style.opacity = 1 - aOut;
@@ -96,12 +145,17 @@ export default function Interests() {
       raf = requestAnimationFrame(update);
     };
 
+    const onResize = () => {
+      lastIndex = -1;
+      update();
+    };
+
     update();
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', update);
+    window.addEventListener('resize', onResize);
     return () => {
       window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', update);
+      window.removeEventListener('resize', onResize);
       if (raf) cancelAnimationFrame(raf);
     };
   }, []);
@@ -109,14 +163,10 @@ export default function Interests() {
   return (
     <section id="intereses" className={styles.interests} ref={sectionRef}>
       <div className={styles.sticky}>
-        {/* Background video */}
-        <video
-          ref={videoRef}
+        {/* Background canvas (frame-by-frame scrubbing) */}
+        <canvas
+          ref={canvasRef}
           className={styles.videoBg}
-          src="/interests.mp4"
-          muted
-          playsInline
-          preload="auto"
           aria-hidden="true"
         />
         <div className={styles.videoOverlay} aria-hidden="true" />

@@ -3,6 +3,8 @@ import { useLang } from '../../context/LangContext';
 import Button from '../shared/Button';
 import styles from './Hero.module.css';
 
+const HERO_FRAME_COUNT = 121;
+
 function scrollToId(id) {
   const el = document.getElementById(id);
   if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -13,27 +15,77 @@ function clamp01(x, a, b) {
   return Math.min(1, Math.max(0, (x - a) / (b - a)));
 }
 
+function preloadFrames(count, basePath) {
+  const imgs = [];
+  for (let i = 1; i <= count; i++) {
+    const img = new Image();
+    img.src = `${basePath}f${String(i).padStart(3, '0')}.webp`;
+    imgs.push(img);
+  }
+  return imgs;
+}
+
 export default function Hero() {
   const { t } = useLang();
   const sectionRef = useRef(null);
-  const videoRef = useRef(null);
+  const canvasRef = useRef(null);
+  const framesRef = useRef(null);
   const panelARef = useRef(null);
   const panelBRef = useRef(null);
   const scrollHintRef = useRef(null);
 
   useEffect(() => {
     const section = sectionRef.current;
-    const video = videoRef.current;
+    const canvas = canvasRef.current;
     const panelA = panelARef.current;
     const panelB = panelBRef.current;
     const scrollHint = scrollHintRef.current;
-    if (!section || !video || !panelA || !panelB) return;
+    if (!section || !canvas || !panelA || !panelB) return;
 
+    const ctx = canvas.getContext('2d');
     const isMobile = window.innerWidth <= 767;
 
+    // Preload all frames
+    const frames = preloadFrames(HERO_FRAME_COUNT, '/frames/hero/');
+    framesRef.current = frames;
+
+    let lastIndex = -1;
+
+    function drawFrame(index) {
+      if (index === lastIndex) return;
+      lastIndex = index;
+      const img = frames[index];
+      if (!img.complete || !img.naturalWidth) return;
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+      const scale = Math.max(canvas.width / img.naturalWidth, canvas.height / img.naturalHeight);
+      const w = img.naturalWidth * scale;
+      const h = img.naturalHeight * scale;
+      ctx.drawImage(img, (canvas.width - w) / 2, (canvas.height - h) / 2, w, h);
+    }
+
+    // Draw first frame as soon as it loads
+    frames[0].onload = () => drawFrame(0);
+    if (frames[0].complete) drawFrame(0);
+
+    // On mobile: loop video fallback via canvas animation
+    let animFrame = 0;
+    let mobileFrameIndex = 0;
+    let lastTime = 0;
+    const FPS = 15;
+    const INTERVAL = 1000 / FPS;
+
+    function mobileLoop(ts) {
+      if (ts - lastTime >= INTERVAL) {
+        lastTime = ts;
+        mobileFrameIndex = (mobileFrameIndex + 1) % HERO_FRAME_COUNT;
+        drawFrame(mobileFrameIndex);
+      }
+      animFrame = requestAnimationFrame(mobileLoop);
+    }
+
     if (isMobile) {
-      video.loop = true;
-      video.play().catch(() => {});
+      animFrame = requestAnimationFrame(mobileLoop);
     }
 
     let raf = 0;
@@ -43,8 +95,9 @@ export default function Hero() {
       const total = Math.max(1, rect.height - window.innerHeight);
       const p = Math.min(1, Math.max(0, -rect.top / total));
 
-      if (!isMobile && video.readyState >= 1 && video.duration) {
-        video.currentTime = p * video.duration;
+      if (!isMobile) {
+        const index = Math.round(p * (HERO_FRAME_COUNT - 1));
+        drawFrame(index);
       }
 
       if (scrollHint) {
@@ -71,26 +124,28 @@ export default function Hero() {
       raf = requestAnimationFrame(update);
     };
 
+    const onResize = () => {
+      lastIndex = -1; // force redraw on resize
+      update();
+    };
+
     update();
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', update);
+    window.addEventListener('resize', onResize);
     return () => {
       window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', update);
+      window.removeEventListener('resize', onResize);
       if (raf) cancelAnimationFrame(raf);
+      if (animFrame) cancelAnimationFrame(animFrame);
     };
   }, []);
 
   return (
     <section id="hero" className={styles.hero} ref={sectionRef}>
       <div className={styles.sticky}>
-        <video
-          ref={videoRef}
+        <canvas
+          ref={canvasRef}
           className={styles.videoBg}
-          src="/hero.mp4"
-          muted
-          playsInline
-          preload="auto"
           aria-hidden="true"
         />
         <div className={styles.videoOverlay} aria-hidden="true" />
