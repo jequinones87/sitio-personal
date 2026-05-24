@@ -17,7 +17,6 @@ const MOTIVS = [
   { id: 'm1', photo: '/images/motiv-padre.webp' },
   { id: 'm2', photo: '/images/motiv-deporte.webp' },
   { id: 'm3', photo: '/images/motiv-proposito.webp' },
-  // TODO: provide image at public/images/motiv-clearlens.webp
   { id: 'm4', photo: '/images/motiv-clearlens.webp' },
 ];
 
@@ -50,36 +49,39 @@ export default function Interests() {
     const canvas = canvasRef.current;
     const panelA = panelARef.current;
     const panelB = panelBRef.current;
-    if (!section || !panelA || !panelB) return;
+    if (!section || !canvas || !panelA || !panelB) return;
 
+    const ctx = canvas.getContext('2d');
     const isMobile = window.innerWidth <= 767;
 
-    // Preload frames (desktop scrubbing + mobile loop)
     const frames = preloadFrames(INT_FRAME_COUNT, '/frames/interests/');
     framesRef.current = frames;
 
     let lastIndex = -1;
 
+    function resizeCanvas() {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+      lastIndex = -1;
+    }
+
     function drawFrame(index) {
-      if (!canvas) return;
       if (index === lastIndex) return;
       lastIndex = index;
       const img = frames[index];
       if (!img.complete || !img.naturalWidth) return;
-      const ctx = canvas.getContext('2d');
-      canvas.width = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
+      if (!canvas.width || !canvas.height) resizeCanvas();
       const scale = Math.max(canvas.width / img.naturalWidth, canvas.height / img.naturalHeight);
       const w = img.naturalWidth * scale;
       const h = img.naturalHeight * scale;
       ctx.drawImage(img, (canvas.width - w) / 2, (canvas.height - h) / 2, w, h);
     }
 
+    resizeCanvas();
     frames[0].onload = () => drawFrame(0);
     if (frames[0].complete) drawFrame(0);
 
     if (isMobile) {
-      // Mobile: loop canvas animation + IntersectionObserver for cards
       let animFrame = 0;
       let mobileFrameIndex = 0;
       let lastTime = 0;
@@ -116,7 +118,6 @@ export default function Interests() {
       };
     }
 
-    // Desktop: scroll-scrubbing via canvas
     let raf = 0;
 
     const update = () => {
@@ -146,7 +147,7 @@ export default function Interests() {
     };
 
     const onResize = () => {
-      lastIndex = -1;
+      resizeCanvas();
       update();
     };
 
@@ -163,7 +164,6 @@ export default function Interests() {
   return (
     <section id="intereses" className={styles.interests} ref={sectionRef}>
       <div className={styles.sticky}>
-        {/* Background canvas (frame-by-frame scrubbing) */}
         <canvas
           ref={canvasRef}
           className={styles.videoBg}

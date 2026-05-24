@@ -51,19 +51,25 @@ export default function Hero() {
 
     let lastIndex = -1;
 
+    function resizeCanvas() {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+      lastIndex = -1;
+    }
+
     function drawFrame(index) {
       if (index === lastIndex) return;
       lastIndex = index;
       const img = frames[index];
       if (!img.complete || !img.naturalWidth) return;
-      canvas.width = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
+      if (!canvas.width || !canvas.height) resizeCanvas();
       const scale = Math.max(canvas.width / img.naturalWidth, canvas.height / img.naturalHeight);
       const w = img.naturalWidth * scale;
       const h = img.naturalHeight * scale;
       ctx.drawImage(img, (canvas.width - w) / 2, (canvas.height - h) / 2, w, h);
     }
 
+    resizeCanvas();
     // Draw first frame as soon as it loads
     frames[0].onload = () => drawFrame(0);
     if (frames[0].complete) drawFrame(0);
@@ -125,7 +131,7 @@ export default function Hero() {
     };
 
     const onResize = () => {
-      lastIndex = -1; // force redraw on resize
+      resizeCanvas();
       update();
     };
 
