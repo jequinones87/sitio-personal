@@ -19,7 +19,7 @@
 
 .grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
 
@@ -112,8 +112,17 @@
 
 @media (max-width: 1023px) {
   .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .grid {
     grid-template-columns: 1fr;
   }
+}
+
+@media (max-width: 767px) {
   .title {
     font-size: 36px;
   }

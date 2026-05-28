@@ -35,7 +35,7 @@ export const es = {
   // About
   'about.tag': '01 — sobre mí',
   'about.title': 'Pienso como diseñador. Ejecuto como marketero.',
-  'about.body': 'Empecé en diseño. Migré hacia el marketing. Y desde ahí no paré.\n\nLlevo más de 15 años trabajando en marketing en contextos muy distintos: desde marcas deportivas globales hasta organizaciones institucionales, pasando por retail, e-commerce y empresas de servicios. Actualmente lidero el área de marketing en IDIEM, la entidad de estudios de estructuras y materiales de la construcción de la Universidad de Chile.\n\nLo que me define no es una industria ni una herramienta. Es la capacidad de entender un negocio desde adentro y construir y contribuir de manera integral a la estrategia de marketing y el crecimiento del negocio.',
+  'about.body': 'Empecé en diseño. Migré hacia el marketing. Y desde ahí no paré.\n\nLlevo más de 15 años trabajando en marketing en contextos muy distintos: desde marcas deportivas globales hasta organizaciones institucionales, pasando por retail, e-commerce y empresas de servicios. Actualmente lidero el área de marketing en IDIEM, la entidad de estudios de estructuras y materiales de la construcción de la Universidad de Chile.\n\nLo que me define no es una industria ni una herramienta. Es la capacidad de entender un negocio desde adentro y construir de manera integral la estrategia y tácticas de marketing para contribuir al crecimiento de las organizaciones y equipos de los que soy parte.',
   'about.pillar1.title': 'Mirada integral',
   'about.pillar1.body': "Abordo cada proyecto conectando las piezas que otros trabajan por separado: la marca, el canal, el contenido, los datos y la experiencia del usuario. Mi formación en diseño me enseñó a ver el sistema completo antes de intervenir en las partes.",
   'about.pillar2.title': 'Creatividad medible',
@@ -110,6 +110,9 @@ export const es = {
   'test.c2.quote': 'Como todo emprendedor necesitaba orientación y alguien que fuera experto en el mundo digital. En un mes logramos tener resultados exponenciales y por supuesto que sigo trabajando junto a la asesoría de Juan Enrique. Muy preparado y preocupado, siempre disponible y atento a las mejoras del mundo digital.',
   'test.c2.name': 'Cristián Fernández',
   'test.c2.role': 'Gerente Comercial, Baños Móviles de Lujo',
+  'test.c3.quote': 'Estamos muy felices de estar trabajando con Juan, desde el primer día nos ha aportado con su conocimiento y dedicación, siendo una fuente constante de consejo y seguimiento a nuestros temas. Estamos agradecidos con su buena disposición y disponibilidad a solucionar cualquier inconveniente que le presentemos.',
+  'test.c3.name': 'Trinidad González',
+  'test.c3.role': 'Socia, Cremaschi Abogados',
 
   // Interests
   'int.tag': '05 — intereses',

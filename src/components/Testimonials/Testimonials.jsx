@@ -14,6 +14,11 @@ const CARDS = [
     photo: '/images/testimonial-cristian.webp',
     linkedin: 'https://www.linkedin.com/in/cristi%C3%A1n-fern%C3%A1ndez-pinochet-ba3493121/',
   },
+  {
+    id: 'c3',
+    photo: '/images/testimonial-trinidad.webp',
+    linkedin: 'https://www.linkedin.com/in/trinidad-gonzalez-besa-227316a8/',
+  },
 ];
 
 export default function Testimonials() {

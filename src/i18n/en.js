@@ -110,6 +110,9 @@ export const en = {
   'test.c2.quote': 'Like any entrepreneur, I needed guidance and someone who was an expert in the digital world. In one month we achieved exponential results, and I am still working with Juan Enrique\'s consulting. Very knowledgeable and attentive, always available and on top of the latest developments in the digital world.',
   'test.c2.name': 'Cristián Fernández',
   'test.c2.role': 'Commercial Manager, Baños Móviles de Lujo',
+  'test.c3.quote': 'We are very happy to be working with Juan. From day one he has contributed with his knowledge and dedication, being a constant source of advice and follow-through on our matters. We are grateful for his willingness and availability to resolve any issue we bring to him.',
+  'test.c3.name': 'Trinidad González',
+  'test.c3.role': 'Partner, Cremaschi Abogados',
 
   // Interests
   'int.tag': '05 — interests',
