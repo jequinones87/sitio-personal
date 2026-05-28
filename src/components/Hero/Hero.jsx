@@ -170,10 +170,10 @@ export default function Hero() {
               <span className={styles.titleLine}>{t('hero.line3.accent')}{t('hero.line3.rest')}</span>
             </h1>
             <div className={styles.ctas}>
-              <Button variant="primary" onClick={() => scrollToId('contacto')}>
+              <Button variant="primary" onClick={() => scrollToId('experiencia')}>
                 {t('hero.cta1')}
               </Button>
-              <Button variant="secondary" className={styles.ctaWhite} onClick={() => scrollToId('experiencia')}>
+              <Button variant="secondary" className={styles.ctaWhite} onClick={() => scrollToId('contacto')}>
                 {t('hero.cta2')}
               </Button>
             </div>

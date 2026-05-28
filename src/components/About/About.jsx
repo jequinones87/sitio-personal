@@ -21,7 +21,9 @@ export default function About() {
           <div className={styles.intro}>
             <SectionTag>{t('about.tag')}</SectionTag>
             <h2 className={styles.title}>{t('about.title')}</h2>
-            <p className={styles.body}>{t('about.body')}</p>
+            {t('about.body').split('\n\n').map((para, i) => (
+              <p key={i} className={styles.body}>{para}</p>
+            ))}
           </div>
 
           <AccordionPrimitive.Root
