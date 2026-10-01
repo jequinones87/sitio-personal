@@ -51,25 +51,25 @@ const PROJECTS = [
 ];
 
 function ProjectMedia({ project, index, t }) {
-  if (project.image) {
-    return (
-      <div className={styles.media}>
+  const { image } = project;
+
+  return (
+    <div className={`${styles.media} ${image ? styles.hasImage : ''}`}>
+      {image && (
         <img
-          src={project.image.src}
-          alt={t(project.image.altKey)}
+          src={image.src}
+          alt={t(image.altKey)}
           className={styles.mediaImg}
           loading="lazy"
         />
+      )}
+      {/* Título del caso (número + empresa): sobre la imagen con un velo
+          para contraste, o como placeholder tipográfico si no hay imagen.
+          Decorativo: la misma información está en el texto del caso. */}
+      <div className={styles.poster} aria-hidden="true">
+        <span className={styles.posterIndex}>{index}</span>
+        <span className={styles.posterCompany}>{t(`projects.${project.id}.company`)}</span>
       </div>
-    );
-  }
-
-  // Placeholder neutro: composición tipográfica con la paleta del sitio,
-  // sin simular material del proyecto.
-  return (
-    <div className={`${styles.media} ${styles.mediaPlaceholder}`} aria-hidden="true">
-      <span className={styles.posterIndex}>{index}</span>
-      <span className={styles.posterCompany}>{t(`projects.${project.id}.company`)}</span>
     </div>
   );
 }
