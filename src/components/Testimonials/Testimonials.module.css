@@ -17,11 +17,12 @@
   text-transform: uppercase;
 }
 
-/* Dos columnas: cita destacada a la izquierda, dos apiladas a la derecha */
+/* Tres columnas iguales; las tarjetas se estiran a la misma altura */
 .grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px var(--gap-xl);
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 1fr; /* misma altura también cuando se apilan */
+  gap: var(--gap-xl);
 }
 
 /* ── Testimonio ─────────────────────────────────────────── */
@@ -32,11 +33,7 @@
   margin: 0;
   padding-left: 24px;
   border-left: 3px solid var(--color-accent);
-}
-
-.featured {
-  grid-row: span 2;
-  align-self: center;
+  min-width: 0;
 }
 
 .quoteIcon {
@@ -58,17 +55,6 @@
   color: var(--color-dark);
 }
 
-.featured .quoteIcon {
-  font-size: 88px;
-}
-
-.featured .quote {
-  font-size: 22px;
-  line-height: 1.55;
-  font-weight: 500;
-  letter-spacing: -0.005em;
-}
-
 /* Nota "Translated from Spanish" (solo EN) */
 .translatedNote {
   margin: -12px 0 20px;
@@ -80,10 +66,12 @@
 
 /* ── Autor ──────────────────────────────────────────────── */
 
+/* margin-top: auto lleva el autor al pie: los nombres quedan alineados */
 .author {
   display: flex;
   align-items: center;
   gap: 14px;
+  margin-top: auto;
 }
 
 .avatar {
@@ -124,12 +112,16 @@
 
 /* ── Responsive ─────────────────────────────────────────── */
 
+/* Bajo 1024px tres columnas quedan demasiado angostas para las citas:
+   se apilan, manteniendo el mismo formato para las tres. */
 @media (max-width: 1023px) {
   .title {
     font-size: 36px;
   }
-  .featured .quote {
-    font-size: 19px;
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    max-width: 640px;
   }
 }
 
@@ -140,22 +132,7 @@
   .header {
     margin-bottom: 40px;
   }
-  .grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-  .featured {
-    grid-row: auto;
-  }
   .card {
     padding-left: 18px;
-  }
-  .quote,
-  .featured .quote {
-    font-size: 16px;
-    line-height: 1.7;
-  }
-  .featured .quoteIcon {
-    font-size: 64px;
   }
 }

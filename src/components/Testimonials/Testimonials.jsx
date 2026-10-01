@@ -3,7 +3,6 @@ import { useScrollFade } from '../../hooks/useScrollFade';
 import SectionTag from '../shared/SectionTag';
 import styles from './Testimonials.module.css';
 
-// El primero se muestra destacado (columna izquierda en desktop).
 const CARDS = [
   {
     id: 'c1',
@@ -34,8 +33,8 @@ export default function Testimonials() {
           <h2 className={styles.title}>{t('test.title')}</h2>
         </div>
         <div className={styles.grid}>
-          {CARDS.map(({ id, photo, linkedin }, i) => (
-            <figure key={id} className={`${styles.card} ${i === 0 ? styles.featured : ''}`}>
+          {CARDS.map(({ id, photo, linkedin }) => (
+            <figure key={id} className={styles.card}>
               <span className={styles.quoteIcon} aria-hidden="true">“</span>
               <blockquote className={styles.quote}>
                 <p>{t(`test.${id}.quote`)}</p>
