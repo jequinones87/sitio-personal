@@ -1,3 +1,5 @@
+// LEGACY — fuera del flujo de la Home desde Phase 2 (reemplazado por components/About).
+// Se conserva como rollback; eliminar junto con sus estilos, i18n y assets asociados.
 import { useEffect, useRef } from 'react';
 import { Users, ClipboardCheck, HeartHandshake, BookOpen } from 'lucide-react';
 import { useLang } from '../../context/LangContext';

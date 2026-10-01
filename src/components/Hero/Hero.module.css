@@ -54,12 +54,13 @@
 }
 
 .intro {
-  font-size: var(--text-h3);
+  font-size: var(--text-small);
   font-weight: 400;
   color: #fff;
   opacity: 0.95;
   margin-bottom: 20px;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .intro strong {
@@ -73,6 +74,7 @@
 
 .introRole {
   opacity: 0.92;
+  white-space: nowrap;
 }
 
 .title {
@@ -80,13 +82,22 @@
   font-weight: 700;
   line-height: 1.1;
   color: #fff;
-  margin-bottom: 36px;
+  margin-bottom: 24px;
   letter-spacing: -0.02em;
   text-shadow: 0 2px 16px rgba(28, 28, 26, 0.18);
 }
 
 .titleLine {
   display: block;
+}
+
+.description {
+  max-width: 600px;
+  font-size: 17px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 32px;
+  text-shadow: 0 1px 12px rgba(28, 28, 26, 0.35);
 }
 
 .accent {
@@ -149,7 +160,7 @@
     font-size: 36px;
   }
   .intro {
-    font-size: 16px;
+    font-size: 12px;
   }
   .tagline {
     font-size: 28px;
@@ -162,5 +173,14 @@
   }
   .title {
     font-size: 32px;
+    margin-bottom: 16px;
+  }
+  .intro {
+    font-size: 11px;
+    margin-bottom: 14px;
+  }
+  .description {
+    font-size: 15px;
+    margin-bottom: 24px;
   }
 }

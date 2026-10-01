@@ -1,3 +1,5 @@
+// LEGACY — fuera del flujo de la Home desde Phase 2 (reemplazado por components/Capabilities).
+// Se conserva como rollback (incluye CircularSkills.jsx); eliminar junto con sus estilos, i18n y assets asociados.
 import { useLang } from '../../context/LangContext';
 import { useScrollFade } from '../../hooks/useScrollFade';
 import SectionTag from '../shared/SectionTag';

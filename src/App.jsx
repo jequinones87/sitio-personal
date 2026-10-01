@@ -1,11 +1,14 @@
 import BackgroundGradient from './components/BackgroundGradient/BackgroundGradient';
 import FloatingMenu from './components/FloatingMenu/FloatingMenu';
 import Hero from './components/Hero/Hero';
-import About from './components/About/About';
-import Skills from './components/Skills/Skills';
+import Credentials from './components/Credentials/Credentials';
+import Impact from './components/Impact/Impact';
+import Projects from './components/Projects/Projects';
+import Capabilities from './components/Capabilities/Capabilities';
 import Experience from './components/Experience/Experience';
+import Approach from './components/Approach/Approach';
 import Testimonials from './components/Testimonials/Testimonials';
-import Interests from './components/Interests/Interests';
+import About from './components/About/About';
 import Contact from './components/Contact/Contact';
 import Footer from './components/Footer/Footer';
 
@@ -16,11 +19,14 @@ export default function App() {
       <FloatingMenu />
       <main>
         <Hero />
-        <About />
-        <Skills />
+        <Credentials />
+        <Impact />
+        <Projects />
+        <Capabilities />
         <Experience />
+        <Approach />
         <Testimonials />
-        <Interests />
+        <About />
         <Contact />
       </main>
       <Footer />

@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useLang } from '../../context/LangContext';
 import Button from '../shared/Button';
+import { CV_URLS, trackCvDownload } from '../shared/cvLinks';
 import styles from './Hero.module.css';
 
 const HERO_FRAME_COUNT = 121;
@@ -26,7 +27,7 @@ function preloadFrames(count, basePath) {
 }
 
 export default function Hero() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
   const sectionRef = useRef(null);
   const canvasRef = useRef(null);
   const framesRef = useRef(null);
@@ -159,21 +160,30 @@ export default function Hero() {
         {/* Panel A — presentación */}
         <div ref={panelARef} className={styles.panel} style={{ opacity: 1, transform: 'translateY(0px)' }}>
           <div className={`container ${styles.panelInner}`}>
-            <h3 className={styles.intro}>
+            <p className={styles.intro}>
               <strong>{t('hero.h3.name')}</strong>
-              <span className={styles.introSep} aria-hidden="true"> | </span>
+              <span className={styles.introSep} aria-hidden="true"> · </span>
               <span className={styles.introRole}>{t('hero.h3.role')}</span>
-            </h3>
+            </p>
             <h1 className={styles.title}>
               <span className={styles.titleLine}>{t('hero.line1.accent')}{t('hero.line1.rest')}</span>
               <span className={styles.titleLine}>{t('hero.line2.accent')}{t('hero.line2.rest')}</span>
               <span className={styles.titleLine}>{t('hero.line3.accent')}{t('hero.line3.rest')}</span>
             </h1>
+            <p className={styles.description}>{t('hero.description')}</p>
             <div className={styles.ctas}>
-              <Button variant="primary" onClick={() => scrollToId('experiencia')}>
+              <Button variant="primary" onClick={() => scrollToId('projects')}>
                 {t('hero.cta1')}
               </Button>
-              <Button variant="secondary" className={styles.ctaWhite} onClick={() => scrollToId('contacto')}>
+              <Button
+                as="a"
+                variant="secondary"
+                className={styles.ctaWhite}
+                href={CV_URLS[lang]}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackCvDownload(lang, 'hero')}
+              >
                 {t('hero.cta2')}
               </Button>
             </div>
@@ -190,12 +200,11 @@ export default function Hero() {
         {/* Panel B — tagline */}
         <div ref={panelBRef} className={styles.panel} style={{ opacity: 0, transform: 'translateY(30px)' }}>
           <div className={`container ${styles.panelInner} ${styles.panelCenter}`}>
-            <h2 className={styles.tagline}>
-              {t('hero.tag.a')}
-              {t('hero.tag.aRest')}
-              {t('hero.tag.b')}
-              {t('hero.tag.bRest')}
-            </h2>
+            <p className={styles.tagline}>
+              {t('hero.secondary').split('\n').map((line) => (
+                <span key={line} className={styles.titleLine}>{line}</span>
+              ))}
+            </p>
           </div>
         </div>
       </div>

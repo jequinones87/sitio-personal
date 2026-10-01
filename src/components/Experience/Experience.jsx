@@ -1,90 +1,63 @@
-import { useState, useEffect } from 'react';
-import { Building2, Briefcase, ShoppingBag, Award, PenTool } from 'lucide-react';
 import { useLang } from '../../context/LangContext';
+import { useScrollReveal } from '../../hooks/useScrollReveal';
 import SectionTag from '../shared/SectionTag';
+import Button from '../shared/Button';
+import { CV_URLS, trackCvDownload } from '../shared/cvLinks';
 import styles from './Experience.module.css';
 
+// Timeline profesional. Textos en i18n: exp.<id>.{company,role,period,summary,b1..bN}
 const ITEMS = [
-  {
-    id: 'item1',
-    image: '/images/experience-idiem.webp',
-    Icon: Building2,
-  },
-  {
-    id: 'item2',
-    image: '/images/experience-consultor.webp',
-    Icon: Briefcase,
-  },
-  {
-    id: 'item3',
-    image: '/images/experience-reebok.webp',
-    Icon: ShoppingBag,
-  },
-  {
-    id: 'item4',
-    image: '/images/experience-adidas.webp',
-    Icon: Award,
-  },
-  {
-    id: 'item5',
-    image: '/images/experience-labstore.webp',
-    Icon: PenTool,
-  },
+  { id: 'item1', bullets: 3, current: true },
+  { id: 'item2', bullets: 3 },
+  { id: 'item3', bullets: 3 },
+  { id: 'item4', bullets: 3 },
+  { id: 'item5', bullets: 1 },
 ];
 
 export default function Experience() {
-  const { t } = useLang();
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [animated, setAnimated] = useState([]);
-
-  useEffect(() => {
-    const timers = ITEMS.map((_, i) =>
-      setTimeout(() => setAnimated((prev) => [...prev, i]), 180 * i)
-    );
-    return () => timers.forEach(clearTimeout);
-  }, []);
+  const { t, lang } = useLang();
+  const { ref, isVisible } = useScrollReveal();
 
   return (
     <section id="experiencia" className={styles.experience}>
-      <div className="container">
-        <div className={styles.header}>
+      <div ref={ref} className={`container reveal ${isVisible ? 'visible' : ''}`}>
+        <header className={styles.header}>
           <SectionTag>{t('exp.tag')}</SectionTag>
           <h2 className={styles.title}>{t('exp.title')}</h2>
           <p className={styles.subtitle}>{t('exp.subtitle')}</p>
-        </div>
+        </header>
 
-        <div className={styles.selector}>
-          {ITEMS.map(({ id, image, Icon }, index) => {
-            const isActive = activeIndex === index;
-            return (
-              <div
-                key={id}
-                className={`${styles.card} ${isActive ? styles.cardActive : ''} ${animated.includes(index) ? styles.cardVisible : ''}`}
-                style={{ backgroundImage: `url('${image}')` }}
-                onClick={() => setActiveIndex(index)}
-                role="button"
-                tabIndex={0}
-                aria-label={t(`exp.${id}.company`)}
-                onKeyDown={(e) => e.key === 'Enter' && setActiveIndex(index)}
-              >
-                <div className={`${styles.shadow} ${isActive ? styles.shadowActive : ''}`} aria-hidden="true" />
-
-                <div className={`${styles.body} ${isActive ? styles.bodyActive : ''}`}>
-                  <p className={styles.bodyText}>{t(`exp.${id}.body`)}</p>
-                </div>
-
-                <div className={styles.label}>
-                  <div className={styles.iconWrap} aria-hidden="true">
-                    <Icon size={22} color="#ffffff" />
-                  </div>
-                  <div className={`${styles.info} ${isActive ? styles.infoActive : ''}`}>
-                    <span className={styles.company}>{t(`exp.${id}.company`)}</span>
-                    <span className={styles.role}>{t(`exp.${id}.role`)}</span>
-                  </div>
-                </div>
+        <ol className={styles.timeline}>
+          {ITEMS.map(({ id, bullets, current }) => (
+            <li key={id} className={`${styles.stage} ${current ? styles.current : ''}`}>
+              <p className={styles.period}>{t(`exp.${id}.period`)}</p>
+              <div className={styles.who}>
+                <h3 className={styles.company}>{t(`exp.${id}.company`)}</h3>
+                <p className={styles.role}>{t(`exp.${id}.role`)}</p>
               </div>
-            );
-          })}
+              <div className={styles.what}>
+                <p className={styles.summary}>{t(`exp.${id}.summary`)}</p>
+                <ul className={styles.bullets}>
+                  {Array.from({ length: bullets }, (_, i) => (
+                    <li key={i} className={styles.bullet}>{t(`exp.${id}.b${i + 1}`)}</li>
+                  ))}
+                </ul>
+              </div>
+            </li>
+          ))}
+        </ol>
+
+        <div className={styles.ctaRow}>
+          <Button
+            as="a"
+            variant="primary"
+            href={CV_URLS[lang]}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => trackCvDownload(lang, 'experience')}
+          >
+            {t('exp.cta')}
+          </Button>
         </div>
       </div>
     </section>

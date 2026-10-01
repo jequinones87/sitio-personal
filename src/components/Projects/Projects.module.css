@@ -1,0 +1,339 @@
+.projects {
+  background: var(--color-surface);
+  padding: var(--section-py) 0;
+}
+
+.header {
+  max-width: 680px;
+  margin-bottom: 64px;
+}
+
+.title {
+  font-size: var(--text-h2);
+  font-weight: 700;
+  line-height: 1.05;
+  color: var(--color-dark);
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.body {
+  font-size: var(--text-body);
+  line-height: 1.7;
+  color: var(--color-dark);
+  opacity: 0.8;
+  max-width: 520px;
+}
+
+/* ── Lista de casos ────────────────────────────────────── */
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 80px var(--gap-xl);
+}
+
+.card {
+  min-width: 0;
+}
+
+/* Caso principal: fila ancha, imagen + contenido */
+.feature {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: var(--gap-xl);
+  align-items: start;
+}
+
+/* Casos estándar: columna con imagen arriba */
+.standard {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* Caso secundario: franja horizontal sin imagen */
+.compact {
+  grid-column: 1 / -1;
+  padding-top: 40px;
+  border-top: 2px solid var(--color-dark);
+}
+
+.compact .content {
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  grid-template-areas:
+    'meta   result'
+    'title  result'
+    'desc   result'
+    'tags   result';
+  column-gap: var(--gap-xl);
+  align-items: start;
+}
+
+.compact .meta        { grid-area: meta; }
+.compact .cardTitle   { grid-area: title; font-size: 24px; }
+.compact .description { grid-area: desc; }
+.compact .tags        { grid-area: tags; }
+.compact .result      { grid-area: result; margin-top: 0; }
+.compact .cta         { grid-column: 1 / -1; }
+
+/* ── Media ─────────────────────────────────────────────── */
+
+.media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-secondary);
+}
+
+.feature .media {
+  aspect-ratio: 4 / 3;
+}
+
+.mediaImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Placeholder tipográfico hasta incorporar material real */
+.mediaPlaceholder {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 28px;
+}
+
+.standard .mediaPlaceholder {
+  background: var(--color-dark);
+}
+
+.posterIndex {
+  font-size: var(--text-small);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--color-primary);
+}
+
+.posterCompany {
+  font-size: clamp(28px, 4vw, 52px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: #fff;
+  padding-top: 16px;
+  border-top: 3px solid var(--color-accent);
+  align-self: flex-start;
+}
+
+/* ── Contenido ─────────────────────────────────────────── */
+
+.content {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+  font-size: var(--text-label);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.index {
+  color: var(--color-secondary);
+}
+
+.company {
+  color: var(--color-dark);
+  font-weight: 700;
+}
+
+.metaDetail {
+  color: var(--color-dark);
+  opacity: 0.65;
+}
+
+.cardTitle {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--color-dark);
+  margin-bottom: 16px;
+}
+
+.feature .cardTitle {
+  font-size: 34px;
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--color-dark);
+  opacity: 0.85;
+}
+
+/* ── Resultado ─────────────────────────────────────────── */
+
+.result {
+  margin-top: 28px;
+  padding-left: 18px;
+  border-left: 3px solid var(--color-accent);
+}
+
+.resultLabel {
+  font-size: var(--text-label);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-secondary);
+  margin-bottom: 8px;
+}
+
+.resultValue {
+  font-size: 52px;
+  color: var(--color-dark);
+  margin-bottom: 8px;
+}
+
+.feature .resultValue {
+  font-size: 64px;
+}
+
+.resultText {
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--color-dark);
+  max-width: 36ch;
+}
+
+/* ── Tags ──────────────────────────────────────────────── */
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 24px;
+}
+
+.tag {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--color-secondary);
+  padding: 3px 10px;
+  border: 1px solid rgba(53, 83, 91, 0.3);
+  border-radius: var(--radius-sm);
+}
+
+/* CTA "Ver caso": solo se renderiza cuando el proyecto tiene href */
+.cta {
+  align-self: flex-start;
+  margin-top: 24px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-secondary);
+  border-bottom: 1.5px solid currentColor;
+  transition: color 0.2s ease;
+}
+
+.cta:hover {
+  color: var(--color-accent);
+}
+
+/* ── Responsive ────────────────────────────────────────── */
+
+@media (max-width: 1023px) {
+  .title {
+    font-size: 36px;
+  }
+  .header {
+    margin-bottom: 48px;
+  }
+  .list {
+    gap: 64px var(--gap-lg);
+  }
+  .feature {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--gap-lg);
+  }
+  .feature .cardTitle {
+    font-size: 28px;
+  }
+  .feature .resultValue {
+    font-size: 52px;
+  }
+  .cardTitle {
+    font-size: 24px;
+  }
+  .resultValue {
+    font-size: 44px;
+  }
+}
+
+@media (max-width: 767px) {
+  .projects {
+    padding: var(--section-py-mobile) 0;
+  }
+  .header {
+    margin-bottom: 40px;
+  }
+  .list {
+    grid-template-columns: 1fr;
+    gap: 56px;
+  }
+  .feature {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .standard {
+    gap: 24px;
+  }
+  .feature .media,
+  .media {
+    aspect-ratio: 16 / 9;
+  }
+  .mediaPlaceholder {
+    padding: 20px;
+  }
+  .cardTitle,
+  .feature .cardTitle,
+  .compact .cardTitle {
+    font-size: 22px;
+  }
+  .resultValue,
+  .feature .resultValue {
+    font-size: 44px;
+  }
+  .compact {
+    padding-top: 32px;
+  }
+  .compact .content {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'meta'
+      'title'
+      'desc'
+      'result'
+      'tags';
+  }
+  .compact .result {
+    margin-top: 24px;
+  }
+}

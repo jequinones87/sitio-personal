@@ -8,11 +8,14 @@ import { useEffect, useState } from 'react';
 // light → fondos claros (#F7F6F2, #FFFFFF) — logo #35535B, FAB teal
 export const SECTION_TONE = {
   hero: 'teal',
-  'sobre-mi': 'light',
-  competencias: 'dark',
-  experiencia: 'light',
+  credenciales: 'dark',
+  impacto: 'light',
+  projects: 'light',
+  capacidades: 'dark',
+  experiencia: 'dark',
+  enfoque: 'light',
   testimonios: 'light',
-  intereses: 'dark',
+  'sobre-mi': 'dark',
   contacto: 'light',
   footer: 'dark',
 };

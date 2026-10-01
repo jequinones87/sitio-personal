@@ -3,6 +3,7 @@ import { useScrollFade } from '../../hooks/useScrollFade';
 import SectionTag from '../shared/SectionTag';
 import styles from './Testimonials.module.css';
 
+// El primero se muestra destacado (columna izquierda en desktop).
 const CARDS = [
   {
     id: 'c1',
@@ -22,7 +23,7 @@ const CARDS = [
 ];
 
 export default function Testimonials() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
   const { ref, style } = useScrollFade();
 
   return (
@@ -33,18 +34,23 @@ export default function Testimonials() {
           <h2 className={styles.title}>{t('test.title')}</h2>
         </div>
         <div className={styles.grid}>
-          {CARDS.map(({ id, photo, linkedin }) => (
-            <figure key={id} className={styles.card}>
-              <span className={styles.quoteIcon} aria-hidden="true">"</span>
+          {CARDS.map(({ id, photo, linkedin }, i) => (
+            <figure key={id} className={`${styles.card} ${i === 0 ? styles.featured : ''}`}>
+              <span className={styles.quoteIcon} aria-hidden="true">“</span>
               <blockquote className={styles.quote}>
-                {t(`test.${id}.quote`)}
+                <p>{t(`test.${id}.quote`)}</p>
               </blockquote>
-              <div className={styles.separator} />
+              {/* Las citas originales están en español; en EN se indica la traducción. */}
+              {lang === 'en' && (
+                <p className={styles.translatedNote}>{t('test.translatedNote')}</p>
+              )}
               <figcaption className={styles.author}>
+                {/* Decorativo: el nombre ya aparece como texto en el link contiguo. */}
                 <img
                   src={photo}
-                  alt={t(`test.${id}.name`)}
+                  alt=""
                   className={styles.avatar}
+                  loading="lazy"
                 />
                 <div>
                   <a
@@ -56,6 +62,7 @@ export default function Testimonials() {
                     {t(`test.${id}.name`)}
                   </a>
                   <div className={styles.role}>{t(`test.${id}.role`)}</div>
+                  <div className={styles.company}>{t(`test.${id}.company`)}</div>
                 </div>
               </figcaption>
             </figure>

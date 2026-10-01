@@ -2,22 +2,21 @@ import { useEffect, useRef, useState } from 'react';
 import {
   Plus,
   User,
-  Sparkles,
   Briefcase,
-  Heart,
   Mail,
   Languages,
   Download,
+  LayoutGrid,
 } from 'lucide-react';
 import { useLang } from '../../context/LangContext';
 import { useSectionTone } from '../../hooks/useSectionTone';
+import { CV_URLS, trackCvDownload } from '../shared/cvLinks';
 import styles from './FloatingMenu.module.css';
 
 const NAV_LINKS = [
-  { id: 'sobre-mi', key: 'nav.about', Icon: User },
-  { id: 'competencias', key: 'nav.skills', Icon: Sparkles },
+  { id: 'projects', key: 'nav.projects', Icon: LayoutGrid },
   { id: 'experiencia', key: 'nav.experience', Icon: Briefcase },
-  { id: 'intereses', key: 'nav.interests', Icon: Heart },
+  { id: 'sobre-mi', key: 'nav.about', Icon: User },
   { id: 'contacto', key: 'nav.contact', Icon: Mail },
 ];
 
@@ -122,16 +121,13 @@ export default function FloatingMenu() {
         <a
           role="menuitem"
           className={`${styles.item} ${styles.cv}`}
-          href={lang === 'es'
-            ? 'https://drive.google.com/file/d/1_c1q0uH4AI93AdYNHmIGvlImMr2sUUky/view?usp=sharing'
-            : 'https://drive.google.com/file/d/1V6_DgFMmVI5YGS1I_ZRq1qZKHjkV7kQK/view?usp=sharing'
-          }
+          href={CV_URLS[lang]}
           target="_blank"
           rel="noopener noreferrer"
           tabIndex={open ? 0 : -1}
           onClick={() => {
             setOpen(false);
-            window.gtag?.('event', `cv_download_${lang}`);
+            trackCvDownload(lang, 'menu');
           }}
         >
           <Download size={16} className={styles.itemIcon} aria-hidden="true" />

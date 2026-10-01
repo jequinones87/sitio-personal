@@ -1,0 +1,11 @@
+.value {
+  display: block;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+.sign {
+  color: var(--color-accent);
+}

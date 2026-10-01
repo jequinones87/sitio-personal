@@ -12,7 +12,7 @@ SPA one-page bilingüe (ES/EN) para **Juan Enrique Quiñones**, Especialista en 
 |------|----------|
 | Framework | React 19 + Vite 7 (NO Vite 8 — rompe en Node 21) |
 | Estilos | **CSS Modules** + custom properties — sin Tailwind, sin styled-components |
-| Animación | CSS transitions + framer-motion (solo en Skills) — NO framer-motion en el resto |
+| Animación | CSS transitions. framer-motion solo en `Skills/` (legacy, fuera de la Home: no entra en el bundle activo) — NO framer-motion en el resto |
 | Íconos | `lucide-react@^0.460.0` (única librería de íconos — react-icons eliminado) |
 | i18n | React Context propio + diccionarios JS planos |
 | Form | Web3Forms (fallback a `mailto:` si no hay `.env.local`) |
@@ -51,7 +51,7 @@ src/
     ├── FloatingMenu/          ← FAB esquina sup-der, abre menú con anclas + CV + toggle ES/EN
     ├── Hero/                  ← video scroll-scrubbed (public/hero.mp4, re-enc. CRF 24)
     ├── About/                 ← accordion Radix (@radix-ui/react-accordion)
-    ├── Skills/                ← carrusel CircularSkills (framer-motion + lucide-react)
+    ├── Skills/                ← LEGACY (fuera de la Home): carrusel CircularSkills (framer-motion + lucide-react)
     ├── Experience/
     ├── Testimonials/
     ├── Interests/
@@ -65,16 +65,23 @@ scripts/
 
 ## 5. Secciones
 
-| # | ID | Notas clave |
-|---|----|-------------|
-| — | fixed | `FloatingMenu`: FAB coral, lista 5 anclas + toggle ES/EN + CV |
-| 1 | `#hero` | `height:500vh`, sticky inner. Video `/hero.mp4` scrubbing por scroll. Panel A (presentación) → Panel B (tagline). Todo texto blanco. |
-| 2 | `#sobre-mi` | Grid 2 cols. Accordion Radix: 3 ítems (Mirada Integral, Creatividad Medible, Adaptación Constante), títulos uppercase coral, +/− icon. |
-| 3 | `#competencias` | `CircularSkills`: carrusel 8 competencias. Fondo `--color-secondary`. |
-| 4 | `#experiencia` | Accordion expandible desktop / stacked cards mobile. 5 items. |
-| 5 | `#testimonios` | 2 cards. Citas se mantienen en español en ambos idiomas. |
-| 6 | `#intereses` | Panel A: 4 glassmorphism cards (IA Marketing, Vibe Coding, DEI, Aprendizaje). Panel B: 4 motivaciones personales (scroll-driven desktop / motivSection mobile). |
-| 7 | `#contacto` | Info izq + form Web3Forms der |
+Orden de la Home (Phase 2 del rediseño portfolio). La numeración visible (`XX — nombre`) vive en las claves `*.tag` de i18n.
+
+| # | ID | Componente | Notas clave |
+|---|----|------------|-------------|
+| — | fixed | `FloatingMenu` | FAB: Proyectos · Experiencia · Sobre mí · Contacto + idioma + CV (`shared/cvLinks.js`) |
+| — | `#hero` | `Hero` | `height:500vh`, canvas de frames. Panel A (H1 único + CTAs) → Panel B (frase secundaria). |
+| — | `#credenciales` | `Credentials` | Franja oscura de transición. |
+| 01 | `#impacto` | `Impact` | 4 métricas (`shared/MetricValue`). Cifras validadas: no inventar ni recalcular. |
+| 02 | `#projects` | `Projects` | Casos; `image`/`href` en `null` hasta tener material/páginas de caso. |
+| 03 | `#capacidades` | `Capabilities` | 4 pilares. Reemplaza a Competencias. |
+| 04 | `#experiencia` | `Experience` | Timeline + CTA CV. |
+| 05 | `#enfoque` | `Approach` | Diseño + Marketing + Tecnología. |
+| 06 | `#testimonios` | `Testimonials` | 3 citas, sin carrusel. Citas originales (ES) sin editar; en EN se muestran traducidas con la nota "Translated from Spanish". |
+| 07 | `#sobre-mi` | `About` | Dimensión humana; integra contenido de la antigua Intereses (`int.p4`, `int.m1–m4`). |
+| 08 | `#contacto` | `Contact` | Info + form Web3Forms. |
+
+**Legacy (fuera de la Home, conservados como rollback):** `components/Skills/` (+ `CircularSkills`) e `components/Interests/`, sus claves i18n `skills.*` / `int.*` no usadas y assets asociados (`public/bckg.mp4`, `public/frames/interests/`, `public/images/competencias/`, `public/images/experience-*`). Eliminar en una fase posterior.
 
 ---
 
@@ -82,7 +89,9 @@ scripts/
 
 - Idioma por defecto: **`es`**. `toggleLang` alterna `es ↔ en`.
 - Diccionarios planos en `src/i18n/es.js` y `en.js`. Llaves tipo `'skills.s1.name'`.
-- **Regla:** cada string nuevo requiere entrada en ambos archivos. Excepción: testimonios (solo ES).
+- **Regla:** cada string nuevo requiere entrada en ambos archivos.
+- **Testimonios:** la cita en ES es el original y no se edita. En EN se permite la traducción, siempre acompañada de la nota "Translated from Spanish" (`test.translatedNote`, visible solo en EN).
+- **Nombres de clientes:** el nombre correcto y definitivo es **"Baños Móviles de Lujo"** (igual en ES y EN; no traducir ni abreviar).
 
 ---
 
@@ -94,7 +103,6 @@ scripts/
 | `foto-hero.jpg` | `src/assets/` | `<ImagePlaceholder>` en Hero |
 | `motiv-clearlens.webp` | `public/images/` | placeholder para tarjeta m4 (Explorar construyendo) |
 | Imágenes competencias definitivas (8) | `public/images/competencias/*.webp` | imágenes actuales |
-| `cv-juan-enrique-quinones.pdf` | `public/` | link 404 en FloatingMenu |
 
 Para imágenes de competencias: actualizar los `src` en el array `SKILLS_DATA` dentro de `src/components/Skills/Skills.jsx`.
 

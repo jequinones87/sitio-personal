@@ -1,0 +1,119 @@
+.approach {
+  background: var(--color-bg);
+  padding: var(--section-py) 0;
+}
+
+.header {
+  margin-bottom: 72px;
+}
+
+.title {
+  font-size: clamp(40px, 6vw, 80px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: var(--color-dark);
+  margin-bottom: 28px;
+}
+
+.titleLine {
+  display: block;
+}
+
+/* Segunda línea en el acento: "Ejecuto como marketero." */
+.titleLine + .titleLine {
+  color: var(--color-accent);
+}
+
+.body {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--color-dark);
+  opacity: 0.85;
+  max-width: 620px;
+}
+
+/* ── Tres dimensiones ──────────────────────────────────── */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0 var(--gap-xl);
+}
+
+.dimension {
+  padding-top: 20px;
+  border-top: 2px solid var(--color-dark);
+  min-width: 0;
+}
+
+.index {
+  display: block;
+  font-size: var(--text-small);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--color-secondary);
+  margin-bottom: 16px;
+}
+
+.name {
+  font-size: clamp(30px, 3.4vw, 44px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--color-dark);
+  margin-bottom: 20px;
+}
+
+.plus {
+  color: var(--color-accent);
+  margin-right: 0.15em;
+}
+
+.text {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--color-dark);
+  opacity: 0.85;
+  max-width: 36ch;
+}
+
+@media (max-width: 1023px) {
+  .header {
+    margin-bottom: 56px;
+  }
+  .grid {
+    gap: 0 var(--gap-lg);
+  }
+  .name {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 767px) {
+  .approach {
+    padding: var(--section-py-mobile) 0;
+  }
+  .header {
+    margin-bottom: 40px;
+  }
+  .title {
+    font-size: 34px;
+  }
+  .body {
+    font-size: 15px;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .name {
+    font-size: 30px;
+    margin-bottom: 12px;
+  }
+  .text {
+    max-width: none;
+  }
+}
