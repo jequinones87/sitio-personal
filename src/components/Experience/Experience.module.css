@@ -4,9 +4,17 @@
   padding: var(--section-py) 0;
 }
 
+/* Encabezado fijo a la izquierda, timeline a la derecha */
+.grid {
+  display: grid;
+  grid-template-columns: 4fr 8fr;
+  gap: var(--gap-xl);
+  align-items: start;
+}
+
 .header {
-  margin-bottom: 56px;
-  max-width: 640px;
+  position: sticky;
+  top: 96px;
 }
 
 .title {
@@ -22,56 +30,103 @@
   font-size: var(--text-body);
   line-height: 1.7;
   color: rgba(255, 255, 255, 0.75);
+  max-width: 360px;
+}
+
+.body {
+  min-width: 0;
 }
 
 /* ── Timeline ──────────────────────────────────────────── */
 
 .timeline {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  flex-direction: column;
 }
 
-/* Cada etapa: periodo | empresa + cargo | descripción */
-.stage {
-  display: grid;
-  grid-template-columns: 2fr 4fr 6fr;
-  gap: var(--gap-lg) var(--gap-xl);
-  padding: 32px 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
+.item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-left: 32px;
+  padding-bottom: 56px;
 }
 
-.period {
+.item:last-child {
+  padding-bottom: 0;
+}
+
+/* Indicador: círculo de 24px sobre la línea */
+.indicator {
+  position: absolute;
+  top: 0;
+  left: -24px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid var(--color-primary);
+  background: var(--color-primary);
+  transform: translateX(-50%);
+}
+
+/* Etapa actual: acento con anillo exterior */
+.item[data-state='current'] .indicator {
+  border-color: var(--color-accent);
+  background: rgba(235, 90, 74, 0.18);
+  outline: 2px solid rgba(235, 90, 74, 0.35);
+  outline-offset: 2px;
+}
+
+/* Separador: une cada indicador con el siguiente */
+.separator {
+  position: absolute;
+  top: 28px;
+  left: -24px;
+  width: 2px;
+  height: calc(100% - 32px);
+  background: rgba(119, 200, 212, 0.4);
+  transform: translateX(-50%);
+}
+
+.item:last-child .separator {
+  display: none;
+}
+
+/* ── Header del ítem ───────────────────────────────────── */
+
+.itemHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.date {
   font-size: var(--text-small);
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #fff;
-  padding-top: 4px;
+  line-height: 24px; /* alineado con el centro del indicador */
+  font-variant-numeric: tabular-nums;
 }
 
-/* Etapa actual: punto de acento antes del periodo */
-.current .period::before {
-  content: '';
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  margin-right: 10px;
-  border-radius: 50%;
-  background: var(--color-accent);
-  vertical-align: 1px;
-}
-
-.company {
+.itemTitle {
   font-size: 22px;
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.01em;
-  margin-bottom: 6px;
 }
 
 .role {
   font-size: 14px;
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.75);
+}
+
+/* ── Contenido ─────────────────────────────────────────── */
+
+.content {
+  max-width: 640px;
 }
 
 .summary {
@@ -106,23 +161,23 @@
 }
 
 .ctaRow {
-  margin-top: 40px;
+  margin-top: 48px;
+  margin-left: 32px;
 }
 
 @media (max-width: 1023px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .header {
+    position: static;
+  }
   .title {
     font-size: 36px;
   }
-  .header {
-    margin-bottom: 40px;
-  }
-  .stage {
-    grid-template-columns: 1fr 2fr;
-    gap: 12px var(--gap-lg);
-  }
-  .period {
-    grid-column: 1 / -1;
-    padding-top: 0;
+  .subtitle {
+    max-width: 560px;
   }
 }
 
@@ -130,15 +185,13 @@
   .experience {
     padding: var(--section-py-mobile) 0;
   }
-  .stage {
-    grid-template-columns: 1fr;
-    gap: 10px;
-    padding: 28px 0;
+  .item {
+    padding-bottom: 44px;
   }
-  .company {
+  .itemTitle {
     font-size: 20px;
   }
   .ctaRow {
-    margin-top: 32px;
+    margin-top: 40px;
   }
 }
