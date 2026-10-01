@@ -1,7 +1,8 @@
-// URLs del CV por idioma. Compartidas por FloatingMenu y Hero.
+// URLs del CV por idioma: minisitios propios (cv/index.html y cv/en/index.html),
+// con el PDF descargable en public/cv/. Compartidas por FloatingMenu, Hero y Experience.
 export const CV_URLS = {
-  es: 'https://drive.google.com/file/d/1_c1q0uH4AI93AdYNHmIGvlImMr2sUUky/view?usp=sharing',
-  en: 'https://drive.google.com/file/d/1V6_DgFMmVI5YGS1I_ZRq1qZKHjkV7kQK/view?usp=sharing',
+  es: '/cv/',
+  en: '/cv/en/',
 };
 
 // Mismo evento GA4 en todas las ubicaciones (continuidad histórica);

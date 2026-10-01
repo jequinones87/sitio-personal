@@ -1,0 +1,326 @@
+/* Minisitio del CV (/cv/ y /cv/en/). Reutiliza los tokens del sitio. */
+@import '../reset.css';
+@import '../theme.css';
+
+.cv-container {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 var(--container-px);
+}
+
+/* ── Cabecera ──────────────────────────────────────────── */
+
+.cv-top {
+  background: var(--color-dark);
+  color: #fff;
+  padding: 24px 0 56px;
+}
+
+.cv-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+  font-size: var(--text-small);
+}
+
+.cv-nav a {
+  color: rgba(255, 255, 255, 0.8);
+  transition: color 0.2s ease;
+}
+
+.cv-nav a:hover {
+  color: #fff;
+}
+
+.cv-lang {
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cv-eyebrow {
+  display: inline-block;
+  font-size: var(--text-label);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--color-accent);
+  color: #fff;
+  padding: 3px 10px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+.cv-name {
+  font-size: clamp(34px, 6vw, 56px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.cv-role {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 20px;
+}
+
+.cv-contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+  font-size: 15px;
+  margin-bottom: 32px;
+}
+
+.cv-contact a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.cv-contact a:hover {
+  color: #fff;
+}
+
+.cv-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.cv-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  padding: 12px 28px;
+  border-radius: var(--radius-pill);
+  transition: opacity 0.2s ease, background 0.2s ease;
+  white-space: nowrap;
+}
+
+.cv-btn--primary {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+.cv-btn--primary:hover {
+  opacity: 0.88;
+}
+
+.cv-btn--secondary {
+  color: #fff;
+  border: 1.5px solid #fff;
+  padding: 11px 28px;
+}
+
+.cv-btn--secondary:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* ── Contenido ─────────────────────────────────────────── */
+
+.cv-main {
+  padding: 56px 0 var(--section-py);
+}
+
+.cv-section + .cv-section {
+  margin-top: 56px;
+}
+
+.cv-section-title {
+  font-size: var(--text-small);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-dark);
+  padding-top: 14px;
+  border-top: 2px solid var(--color-dark);
+  margin-bottom: 24px;
+}
+
+.cv-profile {
+  font-size: 17px;
+  line-height: 1.7;
+  max-width: 720px;
+}
+
+/* Timeline (mismo lenguaje que la sección Experiencia del sitio) */
+.cv-timeline {
+  display: flex;
+  flex-direction: column;
+}
+
+.cv-job {
+  position: relative;
+  margin-left: 32px;
+  padding-bottom: 40px;
+}
+
+.cv-job:last-child {
+  padding-bottom: 0;
+}
+
+.cv-job::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -24px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--color-secondary);
+  background: var(--color-secondary);
+  transform: translateX(-50%);
+}
+
+.cv-job--current::before {
+  border-color: var(--color-accent);
+  background: rgba(235, 90, 74, 0.15);
+  outline: 2px solid rgba(235, 90, 74, 0.3);
+  outline-offset: 2px;
+}
+
+.cv-job::after {
+  content: '';
+  position: absolute;
+  top: 26px;
+  left: -24px;
+  width: 2px;
+  height: calc(100% - 30px);
+  background: rgba(53, 83, 91, 0.25);
+  transform: translateX(-50%);
+}
+
+.cv-job:last-child::after {
+  display: none;
+}
+
+.cv-job-date {
+  font-size: var(--text-small);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-secondary);
+  line-height: 20px;
+  margin-bottom: 6px;
+}
+
+.cv-job-company {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.cv-job-role {
+  font-size: 15px;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.cv-job-role em {
+  font-style: normal;
+  font-weight: 500;
+}
+
+.cv-job-place {
+  color: var(--color-secondary);
+}
+
+.cv-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cv-list li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.cv-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.8em;
+  width: 8px;
+  height: 1.5px;
+  background: var(--color-accent);
+}
+
+.cv-list strong {
+  font-weight: 700;
+}
+
+/* ── Pie ───────────────────────────────────────────────── */
+
+.cv-footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 24px 0 40px;
+  font-size: var(--text-small);
+  color: var(--color-secondary);
+}
+
+.cv-footer a {
+  color: var(--color-secondary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 767px) {
+  .cv-top {
+    padding: 20px 0 44px;
+  }
+  .cv-nav {
+    margin-bottom: 36px;
+  }
+  .cv-role {
+    font-size: 16px;
+  }
+  .cv-main {
+    padding: 44px 0 var(--section-py-mobile);
+  }
+  .cv-section + .cv-section {
+    margin-top: 44px;
+  }
+  .cv-profile {
+    font-size: 16px;
+  }
+  .cv-job-company {
+    font-size: 18px;
+  }
+}
+
+/* Impresión: solo el contenido del CV */
+@media print {
+  .cv-nav,
+  .cv-actions,
+  .cv-footer {
+    display: none;
+  }
+  .cv-top {
+    background: none;
+    color: var(--color-dark);
+    padding: 0 0 16px;
+  }
+  .cv-role {
+    color: var(--color-dark);
+  }
+  .cv-contact a {
+    color: var(--color-dark);
+  }
+  .cv-main {
+    padding-top: 16px;
+  }
+}

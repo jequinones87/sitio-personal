@@ -81,6 +81,8 @@ Orden de la Home (Phase 2 del rediseño portfolio). La numeración visible (`XX 
 | 07 | `#sobre-mi` | `About` | Dimensión humana; integra contenido de la antigua Intereses (`int.p4`, `int.m1–m4`). |
 | 08 | `#contacto` | `Contact` | Info + form Web3Forms. |
 
+**Minisitio del CV:** `/cv/` (ES) y `/cv/en/` (EN) son páginas HTML estáticas (`cv/index.html`, `cv/en/index.html`, entradas extra en `vite.config.js`) con estilos en `src/cv/cv.css` (reutiliza `reset.css` + `theme.css`). Replican el PDF literal salvo el teléfono (solo en el PDF). PDFs en `public/cv/`. No se indexan (meta robots + `X-Robots-Tag` en `vercel.json`). Para actualizar el CV: reemplazar el PDF en `public/cv/` y sincronizar el HTML.
+
 **Legacy (fuera de la Home, conservados como rollback):** `components/Skills/` (+ `CircularSkills`) e `components/Interests/`, sus claves i18n `skills.*` / `int.*` no usadas y assets asociados (`public/bckg.mp4`, `public/frames/interests/`, `public/images/competencias/`, `public/images/experience-*`). Eliminar en una fase posterior.
 
 ---
@@ -91,7 +93,7 @@ Orden de la Home (Phase 2 del rediseño portfolio). La numeración visible (`XX 
 - Diccionarios planos en `src/i18n/es.js` y `en.js`. Llaves tipo `'skills.s1.name'`.
 - **Regla:** cada string nuevo requiere entrada en ambos archivos.
 - **Testimonios:** la cita en ES es el original y no se edita. En EN se permite la traducción, siempre acompañada de la nota "Translated from Spanish" (`test.translatedNote`, visible solo en EN).
-- **Nombres de clientes:** el nombre correcto y definitivo es **"Baños Móviles de Lujo"** (igual en ES y EN; no traducir ni abreviar).
+- **Nombres de clientes:** el nombre correcto y definitivo es **"Baños Móviles de Lujo"** (igual en ES y EN; no traducir ni abreviar). Excepción: el minisitio del CV (`/cv/`) replica el PDF literal, que dice "Baños de Lujo".
 
 ---
 
