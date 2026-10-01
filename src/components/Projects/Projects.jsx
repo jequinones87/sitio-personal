@@ -7,8 +7,8 @@ import styles from './Projects.module.css';
 // Casos seleccionados. Textos en i18n (`projects.<id>.*`); cifras exactas aquí.
 //
 // variant: 'feature' (fila ancha) · 'standard' (columna) · 'compact' (caso secundario)
-// image:   null mientras no exista material real. Para activarla:
-//          { src: '/images/projects/<id>.webp', altKey: 'projects.<id>.imageAlt' }
+// image:   { src, altKey } — imagen ilustrativa del caso (WebP en public/images/).
+//          null muestra un placeholder tipográfico con la paleta del sitio.
 // href:    null mientras no exista la página del caso. Al definirla se muestra
 //          el CTA "Ver caso" automáticamente.
 const PROJECTS = [
@@ -18,7 +18,7 @@ const PROJECTS = [
     hasMeta: true,
     result: '+250%',
     tags: ['B2B', 'Marketing Strategy', 'Demand Generation', 'Content', 'Digital'],
-    image: null,
+    image: { src: '/images/experience-idiem.webp', altKey: 'projects.idiem.imageAlt' },
     href: null,
   },
   {
@@ -27,7 +27,7 @@ const PROJECTS = [
     hasMeta: false,
     result: '+300%',
     tags: ['Omnichannel', 'E-commerce', 'Retail', 'Trade Marketing', 'Campaign'],
-    image: null,
+    image: { src: '/images/experience-adidas.webp', altKey: 'projects.reebok.imageAlt' },
     href: null,
   },
   {
@@ -36,7 +36,7 @@ const PROJECTS = [
     hasMeta: true,
     result: '+20%',
     tags: ['Digital Commerce', 'E-commerce', 'Content', 'Conversion'],
-    image: null,
+    image: { src: '/images/experience-reebok.webp', altKey: 'projects.ripley.imageAlt' },
     href: null,
   },
   {

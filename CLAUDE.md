@@ -83,7 +83,7 @@ Orden de la Home (Phase 2 del rediseño portfolio). La numeración visible (`XX 
 
 **Minisitio del CV:** `/cv/` (ES) y `/cv/en/` (EN) son páginas HTML estáticas (`cv/index.html`, `cv/en/index.html`, entradas extra en `vite.config.js`) con estilos en `src/cv/cv.css` (reutiliza `reset.css` + `theme.css`). Replican el PDF literal salvo el teléfono (solo en el PDF). PDFs en `public/cv/`. No se indexan (meta robots + `X-Robots-Tag` en `vercel.json`). Para actualizar el CV: reemplazar el PDF en `public/cv/` y sincronizar el HTML.
 
-**Legacy (fuera de la Home, conservados como rollback):** `components/Skills/` (+ `CircularSkills`) e `components/Interests/`, sus claves i18n `skills.*` / `int.*` no usadas y assets asociados (`public/bckg.mp4`, `public/frames/interests/`, `public/images/competencias/`, `public/images/experience-*`). Eliminar en una fase posterior.
+**Legacy (fuera de la Home, conservados como rollback):** `components/Skills/` (+ `CircularSkills`) e `components/Interests/`, sus claves i18n `skills.*` / `int.*` no usadas y assets asociados (`public/bckg.mp4`, `public/frames/interests/`, `public/images/competencias/`, `public/images/experience-consultor.webp` y `experience-labstore.webp`; `experience-idiem`, `-adidas` y `-reebok` los usa Projects). Eliminar en una fase posterior.
 
 ---
 
