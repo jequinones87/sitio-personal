@@ -1,6 +1,5 @@
 import { useLang } from '../../context/LangContext';
 import { useScrollReveal } from '../../hooks/useScrollReveal';
-import SectionTag from '../shared/SectionTag';
 import styles from './Capabilities.module.css';
 
 // Reemplaza a la antigua sección Competencias (components/Skills, ahora legacy).
@@ -21,7 +20,6 @@ export default function Capabilities() {
     <section id="capacidades" className={styles.capabilities}>
       <div ref={ref} className={`container reveal ${isVisible ? 'visible' : ''}`}>
         <header className={styles.header}>
-          <SectionTag>{t('cap.tag')}</SectionTag>
           <h2 className={styles.title}>{t('cap.title')}</h2>
           <p className={styles.body}>{t('cap.body')}</p>
         </header>

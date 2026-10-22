@@ -1,6 +1,5 @@
 import { useLang } from '../../context/LangContext';
 import { useScrollFade } from '../../hooks/useScrollFade';
-import SectionTag from '../shared/SectionTag';
 import styles from './Testimonials.module.css';
 
 const CARDS = [
@@ -29,7 +28,6 @@ export default function Testimonials() {
     <section id="testimonios" className={styles.testimonials}>
       <div className="container" ref={ref} style={style}>
         <div className={styles.header}>
-          <SectionTag>{t('test.tag')}</SectionTag>
           <h2 className={styles.title}>{t('test.title')}</h2>
         </div>
         <div className={styles.grid}>

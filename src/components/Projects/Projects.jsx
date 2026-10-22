@@ -1,6 +1,5 @@
 import { useLang } from '../../context/LangContext';
 import { useScrollReveal } from '../../hooks/useScrollReveal';
-import SectionTag from '../shared/SectionTag';
 import MetricValue from '../shared/MetricValue';
 import styles from './Projects.module.css';
 
@@ -128,7 +127,6 @@ export default function Projects() {
     <section id="projects" className={styles.projects}>
       <div ref={ref} className={`container reveal ${isVisible ? 'visible' : ''}`}>
         <header className={styles.header}>
-          <SectionTag>{t('projects.tag')}</SectionTag>
           <h2 className={styles.title}>{t('projects.title')}</h2>
           <p className={styles.body}>{t('projects.body')}</p>
         </header>

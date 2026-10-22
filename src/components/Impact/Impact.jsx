@@ -1,6 +1,5 @@
 import { useLang } from '../../context/LangContext';
 import { useScrollReveal } from '../../hooks/useScrollReveal';
-import SectionTag from '../shared/SectionTag';
 import MetricValue from '../shared/MetricValue';
 import styles from './Impact.module.css';
 
@@ -15,20 +14,21 @@ const METRICS = [
 export default function Impact() {
   const { t } = useLang();
   const { ref, isVisible } = useScrollReveal();
+  // La cuenta de las cifras arranca cuando la grilla ya está en pantalla
+  const { ref: gridRef, isVisible: gridVisible } = useScrollReveal({ rootMargin: '0px 0px -20% 0px' });
 
   return (
     <section id="impacto" className={styles.impact}>
       <div ref={ref} className={`container reveal ${isVisible ? 'visible' : ''}`}>
         <header className={styles.header}>
-          <SectionTag>{t('impact.tag')}</SectionTag>
           <h2 className={styles.title}>{t('impact.title')}</h2>
           <p className={styles.body}>{t('impact.body')}</p>
         </header>
 
-        <ul className={styles.grid}>
+        <ul ref={gridRef} className={styles.grid}>
           {METRICS.map(({ id, value, hasNote }) => (
             <li key={id} className={styles.metric}>
-              <MetricValue value={value} className={styles.value} />
+              <MetricValue value={value} className={styles.value} animate={gridVisible} />
               <p className={styles.label}>{t(`impact.${id}.label`)}</p>
               <p className={styles.source}>{t(`impact.${id}.source`)}</p>
               <p className={styles.context}>{t(`impact.${id}.context`)}</p>

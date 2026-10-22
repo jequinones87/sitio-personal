@@ -1,6 +1,5 @@
 import { useLang } from '../../context/LangContext';
 import { useScrollReveal } from '../../hooks/useScrollReveal';
-import SectionTag from '../shared/SectionTag';
 import Button from '../shared/Button';
 import { CV_URLS, trackCvDownload } from '../shared/cvLinks';
 import styles from './Experience.module.css';
@@ -25,7 +24,6 @@ export default function Experience() {
       <div ref={ref} className={`container reveal ${isVisible ? 'visible' : ''}`}>
         <div className={styles.grid}>
           <header className={styles.header}>
-            <SectionTag>{t('exp.tag')}</SectionTag>
             <h2 className={styles.title}>{t('exp.title')}</h2>
             <p className={styles.subtitle}>{t('exp.subtitle')}</p>
           </header>

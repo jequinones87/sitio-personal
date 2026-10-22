@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useLang } from '../../context/LangContext';
 import { useScrollFade } from '../../hooks/useScrollFade';
-import SectionTag from '../shared/SectionTag';
 import Button from '../shared/Button';
 import styles from './Contact.module.css';
 
@@ -59,7 +58,6 @@ export default function Contact() {
       <div className="container" ref={ref} style={style}>
         <div className={styles.grid}>
           <div>
-            <SectionTag>{t('contact.tag')}</SectionTag>
             <h2 className={styles.title}>{t('contact.title')}</h2>
             <p className={styles.body}>{t('contact.body')}</p>
             <div className={styles.infoList}>

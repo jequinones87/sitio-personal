@@ -65,7 +65,7 @@ scripts/
 
 ## 5. Secciones
 
-Orden de la Home (Phase 2 del rediseño portfolio). La numeración visible (`XX — nombre`) vive en las claves `*.tag` de i18n.
+Orden de la Home (Phase 2 del rediseño portfolio). Las secciones no muestran etiqueta numerada sobre el título (se quitaron); la columna # es solo el orden.
 
 | # | ID | Componente | Notas clave |
 |---|----|------------|-------------|

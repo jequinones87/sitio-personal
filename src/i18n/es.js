@@ -41,7 +41,6 @@ export const es = {
   'cred.cat5': 'Servicios profesionales',
 
   // Impacto
-  'impact.tag': '01 — resultados',
   'impact.title': 'Estrategia que se traduce en resultados',
   'impact.body': 'Una selección de resultados obtenidos en proyectos que he liderado o desarrollado.',
   'impact.m1.label': 'Ventas digitales',
@@ -59,7 +58,6 @@ export const es = {
   'impact.m4.note': '+13% en interacciones durante el mismo periodo.',
 
   // Proyectos
-  'projects.tag': '02 — casos',
   'projects.title': 'Distintos desafíos. Un mismo enfoque.',
   'projects.body': 'Entender el problema, conectar estrategia y ejecución y utilizar creatividad, canales y datos para contribuir a resultados de negocio.',
   'projects.resultLabel': 'Resultado',
@@ -89,7 +87,6 @@ export const es = {
   'projects.banos.result': 'en generación de leads vía mensajería.',
 
   // Capacidades
-  'cap.tag': '03 — capacidades',
   'cap.title': 'Marketing como sistema, no como una colección de canales.',
   'cap.body': 'Combino estrategia, creatividad, datos y tecnología para conectar las acciones de marketing con objetivos de negocio.',
   'cap.a1.name': 'Estrategia & Growth',
@@ -99,7 +96,6 @@ export const es = {
   'cap.closing': 'Las herramientas cambian. El enfoque no: entender negocio, cliente, datos y contexto antes de ejecutar.',
 
   // Sobre mí (dimensión humana — integra el contenido útil de la antigua sección Intereses)
-  'about.tag': '07 — sobre mí',
   'about.title': 'Detrás del marketing',
   'about.intro': 'Empecé en diseño. Migré hacia el marketing. Y desde ahí no paré.',
 
@@ -142,7 +138,6 @@ export const es = {
   'skills.next': 'Siguiente',
 
   // Experience (timeline)
-  'exp.tag': '04 — experiencia',
   'exp.title': 'Trayectoria profesional',
   'exp.subtitle': 'Del diseño industrial al marketing estratégico, pasando por agencias, retail y el mundo B2B.',
   'exp.cta': 'Ver / Descargar CV',
@@ -181,7 +176,6 @@ export const es = {
   'exp.item5.b1': 'La base que consolidó la mirada de punto de venta llevada luego al marketing.',
 
   // Enfoque — Diseño + Marketing + Tecnología
-  'approach.tag': '05 — enfoque',
   'approach.title': 'Pienso como diseñador.\nEjecuto como marketero.',
   'approach.body': 'Mi perfil se ha construido en la intersección entre diseño, marketing y tecnología. Tres perspectivas que utilizo de forma complementaria para entender problemas, tomar decisiones y convertir estrategia en ejecución.',
   'approach.d1.name': 'Diseño',
@@ -192,7 +186,6 @@ export const es = {
   'approach.d3.body': 'Hoy incorporo analítica, automatización, CRM e inteligencia artificial como herramientas para ampliar las capacidades de marketing y mejorar la toma de decisiones.',
 
   // Testimonials
-  'test.tag': '06 — testimonios',
   'test.title': 'Lo que dicen quienes han trabajado conmigo',
   // Nota de traducción: solo se muestra en EN (las citas ES son el original).
   'test.translatedNote': 'Traducido del español',
@@ -237,7 +230,6 @@ export const es = {
   'int.m4.alt': 'ClearLens — extensión Chrome con IA',
 
   // Contact
-  'contact.tag': '08 — contacto',
   'contact.title': '¿Hablamos?',
   'contact.body': 'Estoy abierto a oportunidades profesionales, proyectos y conversaciones sobre marketing, estrategia y transformación digital.',
   'contact.form.name': 'Nombre',

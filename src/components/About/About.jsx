@@ -1,6 +1,5 @@
 import { useLang } from '../../context/LangContext';
 import { useScrollReveal } from '../../hooks/useScrollReveal';
-import SectionTag from '../shared/SectionTag';
 import styles from './About.module.css';
 
 // Dimensión humana del perfil. Integra el contenido útil de la antigua
@@ -33,7 +32,6 @@ export default function About() {
       <div ref={ref} className={`container reveal ${isVisible ? 'visible' : ''}`}>
         <div className={styles.grid}>
           <div className={styles.intro}>
-            <SectionTag>{t('about.tag')}</SectionTag>
             <h2 className={styles.title}>{t('about.title')}</h2>
             <p className={styles.lead}>{t('about.intro')}</p>
             <p className={styles.body}>{t('int.p4.body')}</p>
