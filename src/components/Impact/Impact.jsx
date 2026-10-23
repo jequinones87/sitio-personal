@@ -14,8 +14,9 @@ const METRICS = [
 export default function Impact() {
   const { t } = useLang();
   const { ref, isVisible } = useScrollReveal();
-  // La cuenta de las cifras arranca cuando la grilla ya está en pantalla
-  const { ref: gridRef, isVisible: gridVisible } = useScrollReveal({ rootMargin: '0px 0px -20% 0px' });
+  // La cuenta arranca cuando el borde superior de la grilla entra en pantalla
+  // (las cifras, unos píxeles más abajo, aún no se ven al pasar a 0)
+  const { ref: gridRef, isVisible: gridVisible } = useScrollReveal({ rootMargin: '0px' });
 
   return (
     <section id="impacto" className={styles.impact}>
@@ -31,7 +32,7 @@ export default function Impact() {
               <MetricValue
                 value={value}
                 className={styles.value}
-                animate={{ armed: isVisible, active: gridVisible }}
+                animate={{ active: gridVisible }}
               />
               <p className={styles.label}>{t(`impact.${id}.label`)}</p>
               <p className={styles.source}>{t(`impact.${id}.source`)}</p>

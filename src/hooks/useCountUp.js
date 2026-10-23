@@ -4,12 +4,11 @@ const prefersReducedMotion = () =>
   typeof window !== 'undefined' &&
   window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 
-// Cuenta de 0 a `target` (ease-out).
-// - Por defecto muestra el valor final (lo que ven buscadores y lectores).
-// - `armed`: la grilla está por entrar en pantalla → la cifra pasa a 0.
-// - `active`: la grilla ya se ve → cuenta hasta el valor final.
+// Cuenta de 0 a `target` (ease-out) cuando `active` pasa a true.
+// Hasta entonces muestra el valor final, así quien no hace scroll (buscadores,
+// capturas, HTML pre-renderizado) ve siempre la cifra real.
 // Sin `enabled` o con prefers-reduced-motion devuelve siempre el valor final.
-export function useCountUp(target, { enabled = false, armed = false, active = false, duration = 1600 } = {}) {
+export function useCountUp(target, { enabled = false, active = false, duration = 1600 } = {}) {
   const [progress, setProgress] = useState(null);
 
   useEffect(() => {
@@ -26,7 +25,7 @@ export function useCountUp(target, { enabled = false, armed = false, active = fa
     return () => cancelAnimationFrame(raf);
   }, [enabled, active, duration]);
 
-  if (!enabled || !armed || prefersReducedMotion()) return target;
+  if (!enabled || !active || prefersReducedMotion()) return target;
   if (progress === null) return 0;
   return Math.round(target * (1 - Math.pow(1 - progress, 3)));
 }

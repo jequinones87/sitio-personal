@@ -1,9 +1,12 @@
 .hero {
   position: relative;
   background: #1C1C1A;
-  /* Sección alta para dar espacio al crossfade entre panel A y panel B. */
+  /* Sección alta para dar espacio al crossfade entre panel A y panel B.
+     El tope solo actúa en viewports extremadamente altos (p. ej. el render
+     de Google), para que el título no quede fuera de su captura. */
   height: 500vh;
   height: 500svh;
+  height: min(500svh, 12000px);
 }
 
 .sticky {
@@ -11,6 +14,7 @@
   top: 0;
   height: 100vh;
   height: 100svh;
+  height: min(100svh, 2400px);
   display: flex;
   align-items: center;
   justify-content: center;

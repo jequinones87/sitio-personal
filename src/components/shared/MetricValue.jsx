@@ -3,9 +3,9 @@ import styles from './MetricValue.module.css';
 
 // Cifra de resultado. Separa el signo "+" para pintarlo con el acento
 // sin alterar el valor (las cifras se muestran tal cual se reciben).
-// Con `animate` ({ armed, active }) el número pasa a 0 justo antes de entrar en
-// pantalla y cuenta al verse; los lectores de pantalla leen siempre el valor
-// final y, sin scroll (buscadores), se muestra el valor final.
+// Con `animate` ({ active }) el número cuenta desde 0 cuando la grilla entra
+// en pantalla; antes muestra el valor final (lo que ven buscadores sin scroll)
+// y los lectores de pantalla leen siempre el valor final.
 export default function MetricValue({ value, className = '', animate }) {
   const sign = value.startsWith('+') ? '+' : '';
   const rest = value.slice(sign.length);
@@ -14,7 +14,6 @@ export default function MetricValue({ value, className = '', animate }) {
   const enabled = animate !== undefined && Boolean(match);
   const counted = useCountUp(target, {
     enabled,
-    armed: Boolean(animate?.armed),
     active: Boolean(animate?.active),
   });
 
