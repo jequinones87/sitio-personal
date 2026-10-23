@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 
-// Marca el elemento como visible cuando su borde superior entra en la franja
-// inferior del viewport. Usa threshold 0 + rootMargin negativo (en vez de un
-// threshold proporcional) para que secciones más altas que el viewport —p. ej.
-// con zoom alto— siempre lleguen a revelarse.
-export function useScrollReveal({ rootMargin = '0px 0px -10% 0px' } = {}) {
+// Marca el elemento como visible poco ANTES de que entre en pantalla
+// (rootMargin positivo por abajo). El contenido es visible por defecto: la
+// clase .visible solo dispara la animación de entrada (ver theme.css), así
+// que nunca queda oculto para quien no hace scroll, como los buscadores.
+export function useScrollReveal({ rootMargin = '0px 0px 25% 0px' } = {}) {
   const ref = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -13,7 +13,7 @@ export function useScrollReveal({ rootMargin = '0px 0px -10% 0px' } = {}) {
     if (!node) return;
     const observer = new IntersectionObserver(
       ([entry]) => {
-        // También revela si, al empezar a observar, la sección ya está por
+        // También marca la sección si, al empezar a observar, ya está por
         // encima del viewport (p. ej. scroll restaurado al recargar).
         if (entry.isIntersecting || entry.boundingClientRect.top < 0) {
           setIsVisible(true);

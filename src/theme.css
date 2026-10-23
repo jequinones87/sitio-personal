@@ -63,21 +63,26 @@ h1, h2, h3 {
   }
 }
 
-/* Scroll reveal */
-.reveal {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 400ms ease-out, transform 400ms ease-out;
-}
+/* Scroll reveal: el contenido es visible por defecto (también para buscadores
+   que no hacen scroll). .visible solo dispara la animación de entrada, que
+   useScrollReveal activa justo antes de que la sección llegue a pantalla. */
 .reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
+  animation: reveal-in 400ms ease-out both;
+}
+
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
+  .reveal.visible {
+    animation: none;
   }
 }

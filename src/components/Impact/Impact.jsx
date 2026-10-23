@@ -28,7 +28,11 @@ export default function Impact() {
         <ul ref={gridRef} className={styles.grid}>
           {METRICS.map(({ id, value, hasNote }) => (
             <li key={id} className={styles.metric}>
-              <MetricValue value={value} className={styles.value} animate={gridVisible} />
+              <MetricValue
+                value={value}
+                className={styles.value}
+                animate={{ armed: isVisible, active: gridVisible }}
+              />
               <p className={styles.label}>{t(`impact.${id}.label`)}</p>
               <p className={styles.source}>{t(`impact.${id}.source`)}</p>
               <p className={styles.context}>{t(`impact.${id}.context`)}</p>

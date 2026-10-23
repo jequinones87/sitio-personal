@@ -4,13 +4,13 @@ const prefersReducedMotion = () =>
   typeof window !== 'undefined' &&
   window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 
-// Cuenta de 0 a `target` (ease-out) cuando `active` pasa a true.
-// Con `enabled` la cifra parte en 0 para no mostrar el valor final antes de
-// animar. Sin `enabled` o con prefers-reduced-motion devuelve el valor final.
-export function useCountUp(target, { enabled = false, active = false, duration = 1600 } = {}) {
-  const [value, setValue] = useState(() =>
-    enabled && !prefersReducedMotion() ? 0 : target
-  );
+// Cuenta de 0 a `target` (ease-out).
+// - Por defecto muestra el valor final (lo que ven buscadores y lectores).
+// - `armed`: la grilla está por entrar en pantalla → la cifra pasa a 0.
+// - `active`: la grilla ya se ve → cuenta hasta el valor final.
+// Sin `enabled` o con prefers-reduced-motion devuelve siempre el valor final.
+export function useCountUp(target, { enabled = false, armed = false, active = false, duration = 1600 } = {}) {
+  const [progress, setProgress] = useState(null);
 
   useEffect(() => {
     if (!enabled || !active || prefersReducedMotion()) return;
@@ -19,13 +19,14 @@ export function useCountUp(target, { enabled = false, active = false, duration =
     const start = performance.now();
     const tick = (now) => {
       const p = Math.min(1, (now - start) / duration);
-      const eased = 1 - Math.pow(1 - p, 3);
-      setValue(Math.round(target * eased));
+      setProgress(p);
       if (p < 1) raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [target, enabled, active, duration]);
+  }, [enabled, active, duration]);
 
-  return value;
+  if (!enabled || !armed || prefersReducedMotion()) return target;
+  if (progress === null) return 0;
+  return Math.round(target * (1 - Math.pow(1 - progress, 3)));
 }
